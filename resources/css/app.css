@@ -629,6 +629,10 @@ html:has(.portfolio-body) {
     transform: translateY(-4px);
 }
 
+.btn-project {
+    margin-top: auto;
+}
+
 .project-card--featured:hover .project-card-inner {
     border-color: rgba(255, 255, 255, 0.12);
 }
@@ -736,11 +740,15 @@ html:has(.portfolio-body) {
     font-size: 0.75rem;
 }
 
+.project-card-inner > .tag-row {
+    margin-bottom: 1.5rem;
+}
+
 .btn-project {
     display: inline-flex;
     align-items: center;
     margin-top: auto;
-    padding: 0.65rem 1.25rem;
+    padding: 0.75rem 1.5rem;
     background: rgba(94, 234, 212, 0.1);
     color: var(--ergo);
     border: 1px solid rgba(94, 234, 212, 0.25);

@@ -45,14 +45,13 @@
                     <p class="hero-greeting">Hey there 👋</p>
                     <h1 class="hero-name">V Cyril Darivs Egipto</h1>
                     <p class="hero-title">
-                        I build web apps that
-                        <span class="hero-highlight">actually work</span>
-                        — and stick around.
+                        Full-Stack Developer passionate about
+                        <span class="hero-highlight">building meaningful products</span>.
                     </p>
                     <p class="hero-subtitle">
-                        Junior full-stack developer with a knack for debugging the tricky stuff,
-                        shipping features in Laravel &amp; Vue, and turning AI ideas into real products.
-                        Currently wrapping up my CS degree while building things that matter.
+                        From web applications to AI-powered solutions, I enjoy creating software that is
+                        clean, scalable, and user-focused. Experienced with Laravel, Vue.js, PHP, and modern
+                        development workflows.
                     </p>
                     <div class="hero-actions">
                         <a href="#projects" class="btn btn-primary">See my work</a>
@@ -99,24 +98,27 @@
                 <div class="about-grid">
                     <div class="about-text reveal">
                         <p>
-                            My path into development wasn't the typical bootcamp route. I spent over three years
-                            at <strong>Strikingly</strong> helping real customers fix real problems .DNS headaches,
-                            broken SSL certs, websites that wouldn't publish. That taught me something no tutorial
+                            My path into development wasn't the typical route. I spent over three years
+                            at <strong>Strikingly</strong> helping real customers fix real problems. Domain DNS headaches,
+                            Email issues, SEO issues, and various website issues. That taught me something no tutorial
                             can: how to think like a user when something breaks.
                         </p> 
                         <p>
-                            These days I'm writing code instead of support tickets. I've shipped freelance projects
-                            in C and C++, interned as a junior dev at <strong>RevDojo</strong> working on their
-                            automotive LMS, and built AI-powered apps like ErgoVision and SnapFolia from the ground up.
+                            These days I'm writing code instead of support tickets. I've built freelance projects in C, Java, and C++, and developed AI-powered applications like ErgoVision and SnapFolia while studying software development.
                         </p>
+
                         <p>
-                            I'm drawn to the intersection of web development and machine learning — building tools
-                            that feel intuitive on the surface but do something clever underneath.
+                            I also interned as a Junior Developer at <strong>RevDojo</strong>, where I worked on their automotive LMS, debugging issues, maintaining existing codebases, and implementing fixes for real-world client requirements.
                         </p>
+
+                        <p>
+                            I'm drawn to the intersection of web development and machine learning, building tools that feel intuitive on the surface but do something clever underneath.
+                        </p>
+
                     </div>
                     <div class="about-stats reveal reveal-delay-1">
                         <div class="stat-card">
-                            <span class="stat-number">3+</span>
+                            <span class="stat-number">4+</span>
                             <span class="stat-label">Years in tech</span>
                         </div>
                         <div class="stat-card">
@@ -124,12 +126,12 @@
                             <span class="stat-label">Freelance projects delivered</span>
                         </div>
                         <div class="stat-card">
-                            <span class="stat-number">96%</span>
-                            <span class="stat-label">Customer satisfaction (Strikingly)</span>
+                            <span class="stat-number">3+</span>
+                            <span class="stat-label">Years in Technical Support</span>
                         </div>
                         <div class="stat-card">
-                            <span class="stat-number">80+</span>
-                            <span class="stat-label">Daily support interactions handled</span>
+                            <span class="stat-number">96%</span>
+                            <span class="stat-label">Customer satisfaction (Strikingly)</span>
                         </div>
                     </div>
                 </div>
@@ -286,9 +288,11 @@
                                 <span class="tag tag--accent">Random Forest</span><span class="tag tag--accent">Laravel</span>
                                 <span class="tag tag--accent">Vue.js</span>
                             </div>
+                            <div class="project-features">
                             <a href="https://ergovision.online" target="_blank" rel="noopener" class="btn btn-project">
                                 Visit ergovision.online →
                             </a>
+</div>
                         </div>
                     </article>
 
