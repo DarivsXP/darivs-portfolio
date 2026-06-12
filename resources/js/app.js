@@ -27,7 +27,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Scroll reveal
     const revealElements = document.querySelectorAll('.reveal');
 
-    if ('IntersectionObserver' in window) {
+    // Respect reduced motion preference
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!prefersReducedMotion && 'IntersectionObserver' in window) {
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach(entry => {
@@ -43,6 +46,17 @@ document.addEventListener('DOMContentLoaded', () => {
         revealElements.forEach(el => observer.observe(el));
     } else {
         revealElements.forEach(el => el.classList.add('visible'));
+    }
+
+    // Skip-link behavior: focus main content for keyboard users
+    const skipLink = document.querySelector('.skip-link');
+    const mainContent = document.getElementById('main-content');
+    if (skipLink && mainContent) {
+        skipLink.addEventListener('click', (e) => {
+            // allow default navigation but ensure focus lands correctly
+            mainContent.setAttribute('tabindex', '-1');
+            mainContent.focus({ preventScroll: true });
+        });
     }
 
     // Active nav link highlighting

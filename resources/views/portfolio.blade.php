@@ -3,8 +3,29 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="V Cyril Darivs Egipto — Junior Full-Stack Web Developer building responsive web apps with Laravel, Vue.js, React, and Python.">
+    <meta name="description" content="V Cyril Darivs Egipto — Full-Stack Developer building responsive web apps with Laravel, Vue.js, React, and Python.">
     <title>V Cyril Darivs Egipto — Full-Stack Developer</title>
+    <link rel="canonical" href="{{ url()->current() }}">
+    <meta name="theme-color" content="#0c0f14">
+    <!-- Open Graph / Social -->
+    <meta property="og:title" content="V Cyril Darivs Egipto — Full-Stack Developer">
+    <meta property="og:description" content="Full-Stack Developer building responsive web apps with Laravel, Vue.js, React, and Python.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="/favicon.ico">
+        <script type="application/ld+json">
+        {!! json_encode([
+                '@context' => 'https://schema.org',
+                '@type' => 'Person',
+                'name' => 'V Cyril Darivs Egipto',
+                'url' => url('/'),
+                'sameAs' => [
+                        'https://linkedin.com/in/v-cyril'
+                ],
+                'jobTitle' => 'Full-Stack Developer',
+                'description' => 'Full-Stack Developer building responsive web apps with Laravel, Vue.js, React, and Python.'
+        ], JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT) !!}
+        </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,400&display=swap" rel="stylesheet">
@@ -22,7 +43,7 @@
     {{-- Navigation --}}
     <header class="site-header" id="site-header">
         <nav class="nav-container">
-            <a href="#hero" class="nav-logo">V. Cyril<span class="nav-logo-dot">.</span></a>
+            <a href="#hero" class="nav-logo">V Cyril<span class="nav-logo-dot">.</span></a>
             <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
                 <span></span><span></span><span></span>
             </button>
@@ -36,7 +57,7 @@
         </nav>
     </header>
 
-    <main>
+    <main id="main-content">
 
         {{-- Hero --}}
         <section id="hero" class="section hero">
@@ -163,15 +184,12 @@
                                 video production, and IT services.
                             </p>
                             <ul class="timeline-highlights">
-                                <li>Diagnosed and resolved software defects across a full-stack environment using PHP, Laravel, Vue.js, MySQL, Git, and RESTful APIs, improving platform stability and reliability</li>
-                                <li>Maintained and enhanced core Learning Management System (LMS) functionalities for an automotive sales training platform serving business clients</li>
-                                <li>Investigated user-reported issues, reproduced bugs, and implemented solutions to improve user experience and system performance</li>
-                                <li>Collaborated with developers to deploy bug fixes, feature enhancements, and production updates using Git-based workflows</li>
-                                <li>Assisted in backend API troubleshooting and database-related issue resolution to ensure seamless system integration</li>
-                                <li>Participated in testing and quality assurance efforts to identify and address software issues before deployment</li>
-                                <li>Worked within a collaborative remote development environment, contributing to project discussions and technical problem-solving</li>
-                                <li>Troubleshot and maintained core functionalities for an automotive sales training platform, ensuring the stability of Learning Management System (LMS) features</li>
-                                <li>Collaborated with the development team to deploy system fixes, improving overall application performance and user experience</li>
+                                <li>Diagnosed and resolved defects across a full-stack Laravel + Vue.js codebase, improving stability</li>
+                                <li>Maintained and enhanced core LMS features used by business clients</li>
+                                <li>Reproduced and fixed user-reported bugs to improve UX and performance</li>
+                                <li>Worked with teammates to deploy fixes and feature updates using Git workflows</li>
+                                <li>Troubleshot backend APIs and database issues to ensure reliable integrations</li>
+                                <li>Contributed to QA efforts to catch regressions before release</li>
                             </ul>
                             <div class="tag-row">
                                 <span class="tag">PHP</span><span class="tag">Laravel</span><span class="tag">Vue.js</span>
@@ -227,16 +245,12 @@
                                 and technical assistance with a pool of expert freelance professionals.
                             </p>
                             <ul class="timeline-highlights">
-                                <li>Successfully delivered 12+ programming projects across PHP, Python, C, and C++ while consistently meeting client deadlines</li>
-                                <li>Developed custom software solutions based on client requirements, demonstrating adaptability across multiple technologies and project scopes</li>
-                                <li>Built a command-line utility in C utilizing pointers, structures, and dynamic memory allocation to simulate Linux file system operations</li>
-                                <li>Designed and implemented a C++ application using object-oriented programming principles for academic record management</li>
-                                <li>Produced clean, maintainable, and well-documented code to support long-term project usability</li>
-                                <li>Collaborated with clients to clarify requirements, troubleshoot issues, and deliver reliable technical solutions</li>
-                                <li>Demonstrated strong time management and independent problem-solving skills while working on multiple projects simultaneously</li>
-                                <li>Developed a command-line utility in C using pointers, structures, and dynamic memory allocation to mimic core Linux file system operations, demonstrating a deep understanding of OS principles</li>
-                                <li>Built a robust application utilizing C++ Object-Oriented Programming principles for managing academic data such as course enrollment, grades, and record persistence</li>
-                                <li>Consistently met diverse client demands by providing robust and well-documented code</li>
+                                <li>Delivered 12+ projects across PHP, Python, C, and C++, consistently meeting deadlines</li>
+                                <li>Built command-line utilities in C demonstrating low-level memory and OS concepts</li>
+                                <li>Designed C++ applications using OOP for academic record management</li>
+                                <li>Produced maintainable, documented code to support long-term use</li>
+                                <li>Collaborated with clients to clarify requirements and troubleshoot issues</li>
+                                <li>Managed multiple projects with strong time-management and problem-solving skills</li>
                             </ul>
                             <div class="tag-row">
                                 <span class="tag">PHP</span><span class="tag">Python</span>
@@ -401,7 +415,7 @@
 
     <footer class="site-footer">
         <div class="container">
-            <p>Built with Laravel &amp; a lot of coffee · © {{ date('Y') }} V Cyril Darivs Egipto</p>
+            <p>Built with Laravel &amp; a lot of coffee · © 2026 V Cyril Darivs Egipto</p>
         </div>
     </footer>
 

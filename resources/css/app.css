@@ -236,6 +236,32 @@ html:has(.portfolio-body) {
     transform: translateY(-7px) rotate(-45deg);
 }
 
+/* ─── Accessibility ─── */
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+.skip-link:focus {
+    left: 1rem;
+    top: 1rem;
+    width: auto;
+    height: auto;
+    padding: 0.5rem 0.75rem;
+    background: var(--surface);
+    color: var(--text);
+    border-radius: 6px;
+    z-index: 9999;
+}
+
+:focus-visible {
+    outline: 3px solid rgba(240, 184, 138, 0.25);
+    outline-offset: 3px;
+}
+
 /* ─── Hero ─── */
 .hero {
     min-height: 100vh;
