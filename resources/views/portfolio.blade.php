@@ -3,13 +3,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="V Cyril Darivs Egipto — Full-Stack Developer building responsive web apps with Laravel, Vue.js, React, and Python.">
-    <title>V Cyril Darivs Egipto — Full-Stack Developer</title>
+    <meta name="description" content="V Cyril Darivs Egipto — Junior Full-Stack Developer experienced in PHP, Laravel, Vue.js, React, Python, and RESTful APIs.">
+    <title>V Cyril Darivs Egipto — Junior Full-Stack Developer</title>
     <link rel="canonical" href="{{ url()->current() }}">
     <meta name="theme-color" content="#0c0f14">
     <!-- Open Graph / Social -->
-    <meta property="og:title" content="V Cyril Darivs Egipto — Full-Stack Developer">
-    <meta property="og:description" content="Full-Stack Developer building responsive web apps with Laravel, Vue.js, React, and Python.">
+    <meta property="og:title" content="V Cyril Darivs Egipto — Junior Full-Stack Developer">
+    <meta property="og:description" content="Junior Full-Stack Developer experienced in PHP, Laravel, Vue.js, React, Python, and RESTful APIs.">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" href="/favicon.ico">
@@ -22,8 +22,8 @@
                 'sameAs' => [
                         'https://linkedin.com/in/v-cyril'
                 ],
-                'jobTitle' => 'Full-Stack Developer',
-                'description' => 'Full-Stack Developer building responsive web apps with Laravel, Vue.js, React, and Python.'
+                'jobTitle' => 'Junior Full-Stack Developer',
+                'description' => 'Junior Full-Stack Developer experienced in PHP, Laravel, Vue.js, React, Python, and RESTful APIs.'
         ], JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT) !!}
         </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,6 +51,7 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#projects">Projects</a></li>
+                <li><a href="/shop">VertexShop</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#contact" class="nav-cta">Say hello</a></li>
             </ul>
@@ -66,13 +67,13 @@
                     <p class="hero-greeting">Hey there 👋</p>
                     <h1 class="hero-name">V Cyril Darivs Egipto</h1>
                     <p class="hero-title">
-                        Full-Stack Developer passionate about
-                        <span class="hero-highlight">building meaningful products</span>.
+                        Junior Full-Stack Developer building
+                        <span class="hero-highlight">scalable web applications</span>.
                     </p>
                     <p class="hero-subtitle">
-                        From web applications to AI-powered solutions, I enjoy creating software that is
-                        clean, scalable, and user-focused. Experienced with Laravel, Vue.js, PHP, and modern
-                        development workflows.
+                        Experienced in PHP, Laravel, Vue.js, React, Python, and RESTful APIs. I develop and
+                        maintain web applications, troubleshoot technical issues, and collaborate effectively
+                        in remote development environments.
                     </p>
                     <div class="hero-actions">
                         <a href="#projects" class="btn btn-primary">See my work</a>
@@ -123,19 +124,21 @@
                             at <strong>Strikingly</strong> helping real customers fix real problems. Domain DNS headaches,
                             Email issues, SEO issues, and various website issues. That taught me something no tutorial
                             can: how to think like a user when something breaks.
-                        </p> 
-                        <p>
-                            These days I'm writing code instead of support tickets. I've built freelance projects in C, Java, and C++, and developed AI-powered applications like ErgoVision and SnapFolia while studying software development.
                         </p>
-
                         <p>
-                            I also interned as a Junior Developer at <strong>RevDojo</strong>, where I worked on their automotive LMS, debugging issues, maintaining existing codebases, and implementing fixes for real-world client requirements.
+                            These days I'm writing code instead of support tickets. I've built freelance projects
+                            in C, Java, and C++, and developed AI-powered applications like ErgoVision and SnapFolia
+                            while studying software development.
                         </p>
-
                         <p>
-                            I'm drawn to the intersection of web development and machine learning, building tools that feel intuitive on the surface but do something clever underneath.
+                            I also worked as a Junior Developer at <strong>RevDojo</strong>, where I worked on their
+                            automotive LMS, debugging issues, maintaining existing codebases, and implementing fixes
+                            for real-world client requirements.
                         </p>
-
+                        <p>
+                            I'm drawn to the intersection of web development and machine learning, building tools
+                            that feel intuitive on the surface but do something clever underneath.
+                        </p>
                     </div>
                     <div class="about-stats reveal reveal-delay-1">
                         <div class="stat-card">
@@ -176,20 +179,19 @@
                                     <h3 class="timeline-role">Junior Developer</h3>
                                     <p class="timeline-company">RevDojo · Florida, USA</p>
                                 </div>
-                                <time class="timeline-date">Jan 2026 – Apr 2026</time>
+                                <time class="timeline-date">Sep 2025 – May 2026</time>
                             </div>
                             <p class="timeline-desc">
-                                RevDojo is a comprehensive solution for automotive businesses, offering services like
-                                learning management systems, mystery shopping, remote BDC, career fairs, live sales training,
-                                video production, and IT services.
+                                RevDojo provides comprehensive solutions for automotive businesses, including
+                                learning management systems, sales training, and IT services.
                             </p>
                             <ul class="timeline-highlights">
-                                <li>Diagnosed and resolved defects across a full-stack Laravel + Vue.js codebase, improving stability</li>
-                                <li>Maintained and enhanced core LMS features used by business clients</li>
-                                <li>Reproduced and fixed user-reported bugs to improve UX and performance</li>
-                                <li>Worked with teammates to deploy fixes and feature updates using Git workflows</li>
-                                <li>Troubleshot backend APIs and database issues to ensure reliable integrations</li>
-                                <li>Contributed to QA efforts to catch regressions before release</li>
+                                <li>Diagnosed and resolved full-stack application issues using PHP, Laravel, Vue.js, MySQL, Git, and RESTful APIs</li>
+                                <li>Maintained and enhanced LMS functionality used by automotive industry clients</li>
+                                <li>Investigated user-reported defects, reproduced issues, and implemented solutions to improve platform stability</li>
+                                <li>Collaborated with developers to deploy bug fixes, feature enhancements, and production updates through Git-based workflows</li>
+                                <li>Assisted with backend API troubleshooting and database-related issue resolution</li>
+                                <li>Participated in quality assurance testing to identify and prevent production issues before deployment</li>
                             </ul>
                             <div class="tag-row">
                                 <span class="tag">PHP</span><span class="tag">Laravel</span><span class="tag">Vue.js</span>
@@ -204,24 +206,21 @@
                             <div class="timeline-header">
                                 <div>
                                     <h3 class="timeline-role">Technical Support Representative</h3>
-                                    <p class="timeline-company">Strikingly · Shanghai, China</p>
+                                    <p class="timeline-company">Strikingly · California, United States</p>
                                 </div>
-                                <time class="timeline-date">Sep 2022 – Jan 2026</time>
+                                <time class="timeline-date">Aug 2022 – Sep 2025</time>
                             </div>
                             <p class="timeline-desc">
                                 Strikingly is a global website-building platform that helps individuals and businesses
-                                create professional, mobile-optimized websites with ease through intuitive design
-                                and modern web solutions.
+                                create professional, mobile-optimized websites through intuitive design tools.
                             </p>
                             <ul class="timeline-highlights">
-                                <li>Provided technical support to global customers through live chat and email, handling 80+ interactions daily while maintaining a customer satisfaction rating above 96%</li>
-                                <li>Troubleshot website-related issues including domain connections, DNS configuration, SSL certificates, custom domains, website publishing, and platform functionality</li>
-                                <li>Diagnosed and resolved website configuration, SEO, and content management issues, achieving a 100% resolution rate for assigned cases</li>
-                                <li>Investigated user-reported technical problems, identified root causes, and guided customers through effective solutions</li>
-                                <li>Escalated complex technical issues to engineering teams and collaborated on issue resolution and product improvements</li>
-                                <li>Assisted customers with website setup, customization, and optimization using the Strikingly website builder platform</li>
-                                <li>Created and documented troubleshooting steps, improving consistency and efficiency in customer issue resolution</li>
-                                <li>Developed strong analytical, communication, and problem-solving skills while supporting customers in a fast-paced remote environment</li>
+                                <li>Provided technical support through live chat and email, handling over 80 customer interactions daily</li>
+                                <li>Maintained a customer satisfaction rating above 96% while supporting a global customer base</li>
+                                <li>Diagnosed and resolved issues involving DNS, SSL certificates, domain configuration, website publishing, and SEO</li>
+                                <li>Investigated technical problems, identified root causes, and guided customers through effective solutions</li>
+                                <li>Collaborated with engineering teams by escalating and documenting complex platform issues</li>
+                                <li>Created troubleshooting documentation that improved consistency and efficiency within support operations</li>
                             </ul>
                             <div class="tag-row">
                                 <span class="tag">Technical Support</span><span class="tag">DNS</span>
@@ -245,12 +244,12 @@
                                 and technical assistance with a pool of expert freelance professionals.
                             </p>
                             <ul class="timeline-highlights">
-                                <li>Delivered 12+ projects across PHP, Python, C, and C++, consistently meeting deadlines</li>
-                                <li>Built command-line utilities in C demonstrating low-level memory and OS concepts</li>
-                                <li>Designed C++ applications using OOP for academic record management</li>
-                                <li>Produced maintainable, documented code to support long-term use</li>
-                                <li>Collaborated with clients to clarify requirements and troubleshoot issues</li>
-                                <li>Managed multiple projects with strong time-management and problem-solving skills</li>
+                                <li>Delivered 12+ programming projects involving PHP, Python, C, and C++ while consistently meeting deadlines</li>
+                                <li>Developed custom software solutions based on client specifications across multiple technologies and project scopes</li>
+                                <li>Built a Linux-style file system simulation in C using pointers, structures, and dynamic memory allocation</li>
+                                <li>Developed an academic record management application using C++ and object-oriented programming principles</li>
+                                <li>Produced clean, maintainable, and well-documented code to support long-term usability and scalability</li>
+                                <li>Collaborated directly with clients to gather requirements, troubleshoot issues, and deliver reliable technical solutions</li>
                             </ul>
                             <div class="tag-row">
                                 <span class="tag">PHP</span><span class="tag">Python</span>
@@ -273,8 +272,42 @@
 
                 <div class="projects-grid">
 
-                    {{-- ErgoVision --}}
+                    {{-- VertexShop --}}
                     <article class="project-card project-card--featured reveal">
+                        <div class="project-card-glow project-card-glow--ergo"></div>
+                        <div class="project-card-inner">
+                            <div class="project-card-top">
+                                <span class="project-year">2026</span>
+                                <a href="/shop" class="project-link" aria-label="Visit VertexShop">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                                </a>
+                            </div>
+                            <div class="project-icon project-icon--ergo">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                            </div>
+                            <h3 class="project-title">VertexShop</h3>
+                            <p class="project-desc">
+                                Full-stack e-commerce platform with secure authentication, product management,
+                                shopping cart, and order processing — featuring a Vue.js storefront and admin dashboard.
+                            </p>
+                            <ul class="project-features">
+                                <li>RESTful APIs connecting Vue.js frontend and Laravel backend</li>
+                                <li>Inventory management and order tracking systems</li>
+                                <li>Git-based version control and scalable development practices</li>
+                            </ul>
+                            <div class="tag-row">
+                                <span class="tag tag--accent">Laravel</span><span class="tag tag--accent">Vue.js</span>
+                                <span class="tag tag--accent">MySQL</span><span class="tag tag--accent">Sanctum</span>
+                                <span class="tag tag--accent">Tailwind CSS</span>
+                            </div>
+                            <a href="/shop" class="btn btn-project">
+                                Explore VertexShop →
+                            </a>
+                        </div>
+                    </article>
+
+                    {{-- ErgoVision --}}
+                    <article class="project-card project-card--featured reveal reveal-delay-1">
                         <div class="project-card-glow project-card-glow--ergo"></div>
                         <div class="project-card-inner">
                             <div class="project-card-top">
@@ -288,30 +321,27 @@
                             </div>
                             <h3 class="project-title">ErgoVision</h3>
                             <p class="project-desc">
-                                An AI-powered posture detection system that watches how you sit and gives
-                                real-time ergonomic feedback. Built end-to-end — from the Python/MediaPipe
-                                ML pipeline to the Laravel + Vue.js web app you can use right now.
+                                AI-powered posture detection system that analyzes posture in real time and
+                                provides ergonomic recommendations through a responsive Laravel + Vue.js dashboard.
                             </p>
                             <ul class="project-features">
-                                <li>Real-time posture analysis via webcam</li>
+                                <li>Real-time posture detection via webcam and MediaPipe</li>
                                 <li>Random Forest classifier for ergonomic scoring</li>
-                                <li>Responsive web dashboard with actionable tips</li>
+                                <li>API communication between ML services and the web platform</li>
                             </ul>
                             <div class="tag-row">
                                 <span class="tag tag--accent">Python</span><span class="tag tag--accent">MediaPipe</span>
                                 <span class="tag tag--accent">Random Forest</span><span class="tag tag--accent">Laravel</span>
                                 <span class="tag tag--accent">Vue.js</span>
                             </div>
-                            <div class="project-features">
                             <a href="https://ergovision.online" target="_blank" rel="noopener" class="btn btn-project">
                                 Visit ergovision.online →
                             </a>
-</div>
                         </div>
                     </article>
 
-                    {{-- SnapFolia --}}
-                    <article class="project-card project-card--featured reveal reveal-delay-1">
+                    {{-- Snapfolia --}}
+                    <article class="project-card project-card--featured reveal reveal-delay-2">
                         <div class="project-card-glow project-card-glow--snap"></div>
                         <div class="project-card-inner">
                             <div class="project-card-top">
@@ -320,20 +350,19 @@
                             <div class="project-icon project-icon--snap">
                                 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22c-2-4-8-6-8-12a8 8 0 0 1 16 0c0 6-6 8-8 12z"/><path d="M12 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>
                             </div>
-                            <h3 class="project-title">SnapFolia</h3>
+                            <h3 class="project-title">Snapfolia</h3>
                             <p class="project-desc">
-                                Ever wondered what plant that leaf belongs to? Snap a photo and find out.
-                                Co-developed this AI-powered web and mobile app that identifies plant species
-                                from leaf images using a custom-trained machine learning model.
+                                Co-developed a web and mobile application that identifies plant species from
+                                leaf images using custom-trained machine learning models and large-scale datasets.
                             </p>
                             <ul class="project-features">
-                                <li>Custom ML model trained on large-scale image datasets</li>
-                                <li>Real-time species classification API</li>
+                                <li>ML model training and integration for image classification</li>
                                 <li>Cross-platform web and mobile experience</li>
+                                <li>Git-based collaboration, deployment, and testing workflows</li>
                             </ul>
                             <div class="tag-row">
-                                <span class="tag tag--green">Machine Learning</span><span class="tag tag--green">Python</span>
-                                <span class="tag tag--green">REST APIs</span><span class="tag tag--green">Git</span>
+                                <span class="tag tag--green">Python</span><span class="tag tag--green">Laravel</span>
+                                <span class="tag tag--green">React</span><span class="tag tag--green">Machine Learning</span>
                                 <span class="tag tag--green">Mobile</span>
                             </div>
                         </div>
@@ -352,17 +381,17 @@
                 </div>
                 <div class="skills-grid">
                     <div class="skills-group reveal">
-                        <h3 class="skills-group-title">Technical</h3>
+                        <h3 class="skills-group-title">Languages &amp; frameworks</h3>
                         <div class="skills-cloud">
-                            @foreach (['PHP', 'Laravel', 'Vue.js', 'React', 'TypeScript', 'JavaScript', 'Python', 'MySQL', 'Git', 'RESTful APIs', 'C', 'C++'] as $skill)
+                            @foreach (['PHP', 'Python', 'JavaScript', 'TypeScript', 'C', 'C++', 'Laravel', 'Vue.js', 'React', 'Node.js', 'Tailwind CSS', 'Bootstrap'] as $skill)
                                 <span class="skill-pill">{{ $skill }}</span>
                             @endforeach
                         </div>
                     </div>
                     <div class="skills-group reveal reveal-delay-1">
-                        <h3 class="skills-group-title">Soft skills</h3>
+                        <h3 class="skills-group-title">Tools, databases &amp; concepts</h3>
                         <div class="skills-cloud">
-                            @foreach (['Problem-solving', 'Adaptability', 'Fast Learner', 'Communication', 'Time Management', 'Attention to Detail', 'Multitasking', 'Organizational Skills'] as $skill)
+                            @foreach (['MySQL', 'PostgreSQL', 'RESTful APIs', 'Git', 'GitHub', 'Vite', 'Docker', 'Firebase', 'Postman', 'MVC', 'OOP', 'CI/CD', 'Authentication & Authorization'] as $skill)
                                 <span class="skill-pill skill-pill--soft">{{ $skill }}</span>
                             @endforeach
                         </div>
@@ -389,8 +418,8 @@
                         <span class="section-label">Contact</span>
                         <h2 class="section-title">Let's build something together</h2>
                         <p class="contact-text">
-                            Whether you have a role in mind, a project idea, or just want to chat about
-                            AI and web dev — my inbox is open.
+                            Whether you have a role in mind, a project idea, or want to connect —
+                            reach me at darivsxp@gmail.com or cyrilegipto.space.
                         </p>
                         <div class="contact-links">
                             <a href="mailto:darivsxp@gmail.com" class="contact-link">

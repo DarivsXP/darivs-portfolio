@@ -1,0 +1,230 @@
+@import 'tailwindcss';
+
+.shop-body {
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    background: var(--shop-bg, #0b1020);
+    color: var(--shop-text, #f8fafc);
+    min-height: 100vh;
+}
+
+.shop-body.light {
+    --shop-bg: #f4f7fb;
+    --shop-surface: #ffffff;
+    --shop-surface-2: #eef2f8;
+    --shop-border: rgba(15, 23, 42, 0.1);
+    --shop-text: #0f172a;
+    --shop-muted: #64748b;
+    --shop-accent: #4f46e5;
+    --shop-accent-2: #06b6d4;
+}
+
+.shop-body:not(.light) {
+    --shop-bg: #0b1020;
+    --shop-surface: #121a2f;
+    --shop-surface-2: #1a2440;
+    --shop-border: rgba(255, 255, 255, 0.08);
+    --shop-text: #f8fafc;
+    --shop-muted: #94a3b8;
+    --shop-accent: #818cf8;
+    --shop-accent-2: #22d3ee;
+}
+
+#shop-app {
+    min-height: 100vh;
+}
+
+.shop-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+}
+
+.shop-card {
+    background: var(--shop-surface);
+    border: 1px solid var(--shop-border);
+    border-radius: 1rem;
+}
+
+.shop-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.25rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: none;
+}
+
+.shop-btn-primary {
+    background: linear-gradient(135deg, var(--shop-accent), var(--shop-accent-2));
+    color: #fff;
+}
+
+.shop-btn-primary:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.05);
+}
+
+.shop-btn-ghost {
+    background: transparent;
+    color: var(--shop-text);
+    border: 1px solid var(--shop-border);
+}
+
+.shop-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+    border: 1px solid var(--shop-border);
+    background: var(--shop-surface-2);
+    color: var(--shop-text);
+}
+
+.shop-select {
+    min-width: 11.5rem;
+    cursor: pointer;
+    appearance: auto;
+    color-scheme: dark;
+}
+
+.shop-body.light .shop-select {
+    color-scheme: light;
+}
+
+.shop-select option {
+    background-color: var(--shop-surface);
+    color: var(--shop-text);
+}
+
+.shop-filter-bar {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.shop-filter-bar .shop-input {
+    width: auto;
+    min-width: 10rem;
+}
+
+.shop-filter-bar .shop-input[type="search"],
+.shop-filter-bar .shop-input[placeholder] {
+    min-width: 14rem;
+    flex: 1 1 14rem;
+}
+
+.shop-empty {
+    padding: 3rem 1.5rem;
+    text-align: center;
+    border: 1px dashed var(--shop-border);
+    border-radius: 1rem;
+    background: var(--shop-surface);
+}
+
+.shop-input:focus {
+    outline: 2px solid color-mix(in srgb, var(--shop-accent) 40%, transparent);
+    outline-offset: 1px;
+}
+
+.shop-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: color-mix(in srgb, var(--shop-accent) 15%, transparent);
+    color: var(--shop-accent);
+}
+
+.shop-grid {
+    display: grid;
+    gap: 1.25rem;
+}
+
+.shop-grid-4 {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+
+.shop-grid-3 {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+.shop-muted {
+    color: var(--shop-muted);
+}
+
+.shop-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.shop-hero {
+    padding: 4rem 0 3rem;
+    background:
+        radial-gradient(circle at top right, color-mix(in srgb, var(--shop-accent) 18%, transparent), transparent 45%),
+        radial-gradient(circle at bottom left, color-mix(in srgb, var(--shop-accent-2) 14%, transparent), transparent 40%);
+}
+
+.shop-product-image {
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    width: 100%;
+    border-radius: 0.85rem;
+    background: var(--shop-surface-2);
+}
+
+.shop-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(12px);
+    background: color-mix(in srgb, var(--shop-bg) 85%, transparent);
+    border-bottom: 1px solid var(--shop-border);
+}
+
+.shop-demo-banner {
+    background: linear-gradient(90deg, color-mix(in srgb, var(--shop-accent) 20%, transparent), color-mix(in srgb, var(--shop-accent-2) 20%, transparent));
+    border-bottom: 1px solid var(--shop-border);
+    padding: 0.55rem 0;
+    text-align: center;
+    font-size: 0.85rem;
+}
+
+.shop-stat {
+    padding: 1.25rem;
+    border-radius: 1rem;
+    background: var(--shop-surface);
+    border: 1px solid var(--shop-border);
+}
+
+.shop-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.shop-table th,
+.shop-table td {
+    padding: 0.85rem 0.75rem;
+    border-bottom: 1px solid var(--shop-border);
+    text-align: left;
+}
+
+.shop-table th {
+    color: var(--shop-muted);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .shop-hide-mobile {
+        display: none;
+    }
+}
