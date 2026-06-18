@@ -1,5 +1,3 @@
-@import 'lenis/dist/lenis.css';
-
 @import 'tailwindcss';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
@@ -114,42 +112,39 @@ html:has(.portfolio-body) {
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    opacity: 0.85;
+    opacity: 0.35;
 }
 
 .cursor-glow {
     position: fixed;
-    width: 420px;
-    height: 420px;
-    margin: -210px 0 0 -210px;
+    left: 0;
+    top: 0;
+    width: 320px;
+    height: 320px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(240, 184, 138, 0.14), rgba(167, 139, 250, 0.06) 40%, transparent 70%);
+    background: radial-gradient(circle, rgba(240, 184, 138, 0.1), transparent 70%);
     pointer-events: none;
     z-index: 9998;
-    transition: transform 0.15s ease, opacity 0.3s;
-    mix-blend-mode: screen;
+    will-change: transform;
 }
 
 .cursor-dot {
     position: fixed;
+    left: 0;
+    top: 0;
     width: 8px;
     height: 8px;
-    margin: -4px 0 0 -4px;
     border-radius: 50%;
     background: var(--accent);
     pointer-events: none;
     z-index: 9999;
-    box-shadow: 0 0 12px rgba(240, 184, 138, 0.8);
-    transition: transform 0.2s ease;
+    box-shadow: 0 0 8px rgba(240, 184, 138, 0.6);
+    will-change: transform;
 }
 
 .portfolio-body.cursor-hover .cursor-dot {
-    transform: scale(2.2);
+    box-shadow: 0 0 14px rgba(167, 139, 250, 0.8);
     background: var(--violet);
-}
-
-.portfolio-body.cursor-hover .cursor-glow {
-    transform: scale(1.15);
 }
 
 .ambient-bg {
@@ -162,9 +157,8 @@ html:has(.portfolio-body) {
 .ambient-orb {
     position: absolute;
     border-radius: 50%;
-    filter: blur(120px);
-    opacity: 0.22;
-    transition: transform 0.1s linear;
+    filter: blur(60px);
+    opacity: 0.16;
 }
 
 .ambient-orb--1 {
@@ -377,9 +371,9 @@ html:has(.portfolio-body) {
 .hero-aurora {
     position: absolute;
     border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.35;
-    animation: aurora-drift 12s ease-in-out infinite;
+    filter: blur(50px);
+    opacity: 0.28;
+    animation: aurora-drift 14s ease-in-out infinite;
 }
 
 .hero-aurora--1 {
@@ -798,16 +792,16 @@ html:has(.portfolio-body) {
     animation: shimmer-text 5s linear infinite;
 }
 
-/* ─── Stack banner (single, CSS auto-scroll) ─── */
+/* ─── Stack banner (CSS scroll — GPU friendly) ─── */
 .stack-banner-section {
-    padding: 3rem 0 3.5rem;
+    padding: 1.25rem 0 1.5rem;
     position: relative;
     z-index: 1;
 }
 
 .stack-banner-header {
     text-align: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.65rem;
 }
 
 .stack-banner-header .section-title {
@@ -816,7 +810,7 @@ html:has(.portfolio-body) {
 
 .stack-banner {
     position: relative;
-    padding: 1.35rem 0;
+    padding: 0.65rem 0;
     border-block: 1px solid var(--border);
     background:
         linear-gradient(90deg, rgba(240, 184, 138, 0.05), transparent 40%, transparent 60%, rgba(167, 139, 250, 0.05)),
@@ -854,63 +848,50 @@ html:has(.portfolio-body) {
     display: flex;
     align-items: center;
     width: max-content;
-    will-change: transform;
+    animation: stack-scroll 55s linear infinite;
+}
+
+.stack-banner:hover .stack-banner-track {
+    animation-play-state: paused;
+}
+
+@keyframes stack-scroll {
+    to { transform: translate3d(-50%, 0, 0); }
 }
 
 .stack-banner-group {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.75rem;
     flex-shrink: 0;
-    padding-right: 1rem;
-}
-
-.stack-banner:hover .stack-banner-track {
-    filter: brightness(1.05);
+    padding-right: 0.75rem;
 }
 
 .stack-chip {
     display: inline-flex;
     align-items: center;
-    gap: 0.55rem;
+    gap: 0.5rem;
     flex-shrink: 0;
-    padding: 0.6rem 1.2rem;
+    padding: 0.45rem 1rem;
     border-radius: 999px;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 600;
     color: var(--text);
     white-space: nowrap;
     background: var(--surface-2);
     border: 1px solid color-mix(in srgb, var(--chip-color) 35%, var(--border));
-    box-shadow: 0 0 20px color-mix(in srgb, var(--chip-color) 8%, transparent);
-    transition: transform 0.25s, box-shadow 0.25s;
-    animation: stack-chip-pulse 4s ease-in-out infinite;
-    animation-delay: calc(var(--chip-i, 0) * 0.15s);
-}
-
-@keyframes stack-chip-pulse {
-    0%, 100% { box-shadow: 0 0 12px color-mix(in srgb, var(--chip-color) 8%, transparent); }
-    50% { box-shadow: 0 0 28px color-mix(in srgb, var(--chip-color) 22%, transparent); }
+    transition: transform 0.2s;
 }
 
 .stack-chip:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 24px color-mix(in srgb, var(--chip-color) 25%, transparent);
+    transform: scale(1.04);
 }
 
 .stack-chip-dot {
-    width: 8px;
-    height: 8px;
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
     flex-shrink: 0;
-    box-shadow: 0 0 10px currentColor;
-    animation: stack-dot-blink 2s ease-in-out infinite;
-    animation-delay: calc(var(--chip-i, 0) * 0.1s);
-}
-
-@keyframes stack-dot-blink {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.65; transform: scale(0.85); }
 }
 
 /* Section label animated underline */
@@ -984,7 +965,6 @@ html:has(.portfolio-body) {
 
 #main-content {
     transform-origin: center top;
-    will-change: transform;
 }
 
 /* ─── Projects grid ─── */
@@ -1274,13 +1254,7 @@ html:has(.portfolio-body) {
     .portfolio-body:not(.portfolio-body--motion) .page-loader { display: none; }
 
     .portfolio-body:not(.portfolio-body--motion) .stack-banner-track {
-        flex-wrap: wrap;
-        justify-content: center;
-        width: 100%;
-        max-width: 1080px;
-        margin: 0 auto;
-        padding: 0 1.5rem;
-        transform: none !important;
+        animation: none;
     }
 
     .portfolio-body:not(.portfolio-body--motion) .stack-banner-group[aria-hidden="true"] {

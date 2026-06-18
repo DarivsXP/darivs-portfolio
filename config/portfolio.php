@@ -13,7 +13,7 @@ return [
             'accent' => 'violet',
             'image' => 'images/projects/vertexshop.png',
             'featured' => true,
-            'live' => null,
+            'live' => 'https://vertexshop.cyrilegipto.space',
             'github' => 'https://github.com/DarivsXP/VertexShop',
         ],
         [

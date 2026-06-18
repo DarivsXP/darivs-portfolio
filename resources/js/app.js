@@ -1,66 +1,32 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Lenis from 'lenis';
 
 gsap.registerPlugin(ScrollTrigger);
+
+const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+const isNarrow = window.matchMedia('(max-width: 900px)').matches;
+const enableFx = !isCoarsePointer && !isNarrow;
 
 document.addEventListener('DOMContentLoaded', () => {
     const header = document.getElementById('site-header');
     const navToggle = document.getElementById('nav-toggle');
     const navLinks = document.getElementById('nav-links');
-    const mainContent = document.getElementById('main-content');
-
-    const motionEnabled = true;
 
     // Page loader
     const loader = document.getElementById('page-loader');
     if (loader) {
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                loader.classList.add('is-done');
-                document.body.classList.add('is-loaded');
-            }, 500);
-        });
-        setTimeout(() => {
+        const finish = () => {
             loader.classList.add('is-done');
             document.body.classList.add('is-loaded');
-        }, 2000);
+        };
+        window.addEventListener('load', () => setTimeout(finish, 400), { once: true });
+        setTimeout(finish, 1500);
     }
 
-    // Lenis smooth scroll + GSAP sync
-    const lenis = new Lenis({
-        duration: 1.15,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        smoothWheel: true,
-    });
-
-    lenis.on('scroll', ScrollTrigger.update);
-
-    gsap.ticker.add((time) => {
-        lenis.raf(time * 1000);
-    });
-    gsap.ticker.lagSmoothing(0);
-
-    // Scroll velocity skew on main content
-    if (mainContent) {
-        const skewTarget = { value: 0 };
-        lenis.on('scroll', ({ velocity }) => {
-            const target = Math.max(-4, Math.min(4, velocity * 0.004));
-            gsap.to(skewTarget, {
-                value: target,
-                duration: 0.4,
-                ease: 'power2.out',
-                onUpdate: () => {
-                    mainContent.style.transform = `skewY(${skewTarget.value}deg)`;
-                },
-            });
-        });
-    }
-
-    // Sticky header
-    lenis.on('scroll', ({ scroll }) => {
-        header?.classList.toggle('scrolled', scroll > 40);
-    });
+    // Sticky header (native scroll — no Lenis)
+    window.addEventListener('scroll', () => {
+        header?.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
 
     // Mobile nav
     navToggle?.addEventListener('click', () => {
@@ -77,10 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Hero character split animation
     initHeroSplit();
 
-    // GSAP scroll reveals (exclude project cards — they have their own animation)
     gsap.utils.toArray('.reveal').forEach((el) => {
         gsap.from(el, {
             scrollTrigger: {
@@ -89,24 +53,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 toggleActions: 'play none none none',
             },
             opacity: 0,
-            y: 36,
-            duration: 0.85,
-            ease: 'power3.out',
+            y: 28,
+            duration: 0.7,
+            ease: 'power2.out',
             delay: parseFloat(getComputedStyle(el).getPropertyValue('--delay')) || 0,
             onStart: () => el.classList.add('visible'),
         });
     });
 
-    // Stack banner marquee
-    initStackBanner();
-
-    // Hero typewriter
     initTypewriter();
-
-    // Project cards entrance
     initProjectCards();
 
-    // Project image fallback
     document.querySelectorAll('.project-demo-img').forEach(img => {
         img.addEventListener('error', () => {
             const fallback = img.dataset.fallback;
@@ -117,89 +74,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { once: true });
     });
 
-    // 3D tilt on project cards
-    document.querySelectorAll('.tilt-card').forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = (e.clientX - rect.left) / rect.width - 0.5;
-            const y = (e.clientY - rect.top) / rect.height - 0.5;
-            gsap.to(card, {
-                rotateY: x * 10,
-                rotateX: -y * 10,
-                y: -6,
-                duration: 0.3,
-                ease: 'power2.out',
-                transformPerspective: 900,
-            });
-        });
-        card.addEventListener('mouseleave', () => {
-            gsap.to(card, {
-                rotateY: 0,
-                rotateX: 0,
-                y: 0,
-                duration: 0.5,
-                ease: 'power2.out',
-            });
-        });
-    });
-
-    // Magnetic elements
-    document.querySelectorAll('.magnetic').forEach(btn => {
-        const strength = btn.classList.contains('magnetic-strong') ? 0.35 : 0.2;
-        btn.addEventListener('mousemove', (e) => {
-            const rect = btn.getBoundingClientRect();
-            const x = e.clientX - rect.left - rect.width / 2;
-            const y = e.clientY - rect.top - rect.height / 2;
-            gsap.to(btn, { x: x * strength, y: y * strength, duration: 0.3, ease: 'power2.out' });
-        });
-        btn.addEventListener('mouseleave', () => {
-            gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1, 0.6)' });
-        });
-    });
-
-    // Cursor glow + dot
-    const glow = document.getElementById('cursor-glow');
-    const dot = document.getElementById('cursor-dot');
-    if (window.matchMedia('(pointer: fine)').matches) {
-        document.addEventListener('mousemove', (e) => {
-            if (glow) {
-                gsap.to(glow, { left: e.clientX, top: e.clientY, duration: 0.6, ease: 'power2.out' });
-            }
-            if (dot) {
-                gsap.to(dot, { left: e.clientX, top: e.clientY, duration: 0.15, ease: 'power2.out' });
-            }
-        });
-
-        document.querySelectorAll('a, button, .tilt-card').forEach(el => {
-            el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
-            el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
-        });
+    if (enableFx) {
+        initTiltCards();
+        initMagnetic();
+        initCursor();
+        const canvas = document.getElementById('particle-canvas');
+        if (canvas) initParticles(canvas);
     } else {
-        glow?.remove();
-        dot?.remove();
+        document.getElementById('cursor-glow')?.remove();
+        document.getElementById('cursor-dot')?.remove();
+        document.getElementById('particle-canvas')?.remove();
     }
 
-    // Particles
-    const canvas = document.getElementById('particle-canvas');
-    if (canvas) {
-        initConstellation(canvas);
-    }
-
-    // Parallax orbs
-    gsap.utils.toArray('.ambient-orb, .hero-aurora').forEach((orb, i) => {
-        gsap.to(orb, {
-            scrollTrigger: {
-                trigger: '#hero',
-                start: 'top top',
-                end: 'bottom top',
-                scrub: true,
-            },
-            y: 80 + i * 40,
-            ease: 'none',
-        });
-    });
-
-    // Active nav
+    // Active nav (single batch update)
     const sections = document.querySelectorAll('section[id]');
     const navItems = navLinks?.querySelectorAll('a[href^="#"]');
     sections.forEach(section => {
@@ -217,8 +104,6 @@ document.addEventListener('DOMContentLoaded', () => {
             },
         });
     });
-
-    window.addEventListener('resize', () => ScrollTrigger.refresh());
 });
 
 function initHeroSplit() {
@@ -243,21 +128,20 @@ function initHeroSplit() {
 
     gsap.from('.hero-char', {
         opacity: 0,
-        y: 28,
-        rotateX: -40,
-        stagger: 0.025,
-        duration: 0.7,
-        ease: 'back.out(1.4)',
-        delay: 0.35,
+        y: 20,
+        stagger: 0.02,
+        duration: 0.55,
+        ease: 'power2.out',
+        delay: 0.3,
     });
 
-    gsap.from('.animate-in:not(.hero-name)', {
+    gsap.from('.animate-in', {
         opacity: 0,
-        y: 24,
-        stagger: 0.1,
-        duration: 0.8,
-        ease: 'power3.out',
-        delay: 0.2,
+        y: 20,
+        stagger: 0.08,
+        duration: 0.65,
+        ease: 'power2.out',
+        delay: 0.15,
     });
 }
 
@@ -300,34 +184,7 @@ function initTypewriter() {
         }
     };
 
-    setTimeout(tick, 1400);
-}
-
-function initStackBanner() {
-    const banner = document.getElementById('stack-banner');
-    const track = document.getElementById('stack-banner-track');
-    if (!banner || !track) return;
-
-    let offset = 0;
-    let paused = false;
-    const speed = 0.35;
-
-    banner.addEventListener('mouseenter', () => { paused = true; });
-    banner.addEventListener('mouseleave', () => { paused = false; });
-
-    const loop = () => {
-        if (!paused) {
-            offset -= speed;
-            const half = track.scrollWidth / 2;
-            if (half > 0 && offset <= -half) {
-                offset += half;
-            }
-            track.style.transform = `translate3d(${offset}px, 0, 0)`;
-        }
-        requestAnimationFrame(loop);
-    };
-
-    requestAnimationFrame(loop);
+    setTimeout(tick, 1200);
 }
 
 function initProjectCards() {
@@ -337,87 +194,138 @@ function initProjectCards() {
     const cards = grid.querySelectorAll('.project-showcase');
     if (!cards.length) return;
 
-    gsap.set(cards, { opacity: 1, y: 0, scale: 1 });
-
     gsap.from(cards, {
         scrollTrigger: {
             trigger: grid,
-            start: 'top 82%',
+            start: 'top 85%',
             toggleActions: 'play none none none',
         },
         opacity: 0,
-        y: 48,
-        scale: 0.94,
-        stagger: 0.18,
-        duration: 0.85,
-        ease: 'power3.out',
+        y: 32,
+        stagger: 0.12,
+        duration: 0.65,
+        ease: 'power2.out',
         immediateRender: false,
     });
 }
 
-function initConstellation(canvas) {
+function initTiltCards() {
+    document.querySelectorAll('.tilt-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width - 0.5;
+            const y = (e.clientY - rect.top) / rect.height - 0.5;
+            card.style.transform = `perspective(900px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg) translateY(-4px)`;
+        }, { passive: true });
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = '';
+        });
+    });
+}
+
+function initMagnetic() {
+    document.querySelectorAll('.magnetic').forEach(btn => {
+        const strength = btn.classList.contains('magnetic-strong') ? 0.28 : 0.16;
+        btn.addEventListener('mousemove', (e) => {
+            const rect = btn.getBoundingClientRect();
+            const x = (e.clientX - rect.left - rect.width / 2) * strength;
+            const y = (e.clientY - rect.top - rect.height / 2) * strength;
+            btn.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+        }, { passive: true });
+        btn.addEventListener('mouseleave', () => {
+            btn.style.transform = '';
+        });
+    });
+}
+
+function initCursor() {
+    const glow = document.getElementById('cursor-glow');
+    const dot = document.getElementById('cursor-dot');
+    if (!glow && !dot) return;
+
+    let mx = 0;
+    let my = 0;
+    let gx = 0;
+    let gy = 0;
+
+    document.addEventListener('mousemove', (e) => {
+        mx = e.clientX;
+        my = e.clientY;
+    }, { passive: true });
+
+    document.querySelectorAll('a, button, .tilt-card').forEach(el => {
+        el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+        el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+    });
+
+    const tick = () => {
+        gx += (mx - gx) * 0.12;
+        gy += (my - gy) * 0.12;
+        if (glow) {
+            glow.style.transform = `translate3d(${gx - 210}px, ${gy - 210}px, 0)`;
+        }
+        if (dot) {
+            dot.style.transform = `translate3d(${mx - 4}px, ${my - 4}px, 0)`;
+        }
+        requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+}
+
+function initParticles(canvas) {
     const ctx = canvas.getContext('2d');
     let particles = [];
-    let w, h;
-    const count = 90;
-    const linkDist = 130;
+    let w = 0;
+    let h = 0;
+    const count = 28;
+    let running = true;
 
     const resize = () => {
-        w = canvas.width = window.innerWidth;
-        h = canvas.height = window.innerHeight;
+        const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+        w = window.innerWidth;
+        h = window.innerHeight;
+        canvas.width = w * dpr;
+        canvas.height = h * dpr;
+        canvas.style.width = `${w}px`;
+        canvas.style.height = `${h}px`;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
 
     const init = () => {
         particles = Array.from({ length: count }, () => ({
             x: Math.random() * w,
             y: Math.random() * h,
-            vx: (Math.random() - 0.5) * 0.45,
-            vy: (Math.random() - 0.5) * 0.45,
-            r: Math.random() * 1.8 + 0.6,
-            a: Math.random() * 0.5 + 0.3,
+            vx: (Math.random() - 0.5) * 0.25,
+            vy: (Math.random() - 0.5) * 0.25,
+            r: Math.random() * 1.2 + 0.5,
         }));
     };
 
     const draw = () => {
+        if (!running) return;
         ctx.clearRect(0, 0, w, h);
-
-        for (let i = 0; i < particles.length; i++) {
-            for (let j = i + 1; j < particles.length; j++) {
-                const dx = particles[i].x - particles[j].x;
-                const dy = particles[i].y - particles[j].y;
-                const dist = Math.hypot(dx, dy);
-                if (dist < linkDist) {
-                    const alpha = (1 - dist / linkDist) * 0.18;
-                    ctx.strokeStyle = `rgba(240, 184, 138, ${alpha})`;
-                    ctx.lineWidth = 0.6;
-                    ctx.beginPath();
-                    ctx.moveTo(particles[i].x, particles[i].y);
-                    ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.stroke();
-                }
-            }
-        }
+        ctx.fillStyle = 'rgba(240, 184, 138, 0.45)';
 
         particles.forEach(p => {
             p.x += p.vx;
             p.y += p.vy;
             if (p.x < 0 || p.x > w) p.vx *= -1;
             if (p.y < 0 || p.y > h) p.vy *= -1;
-
-            const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 3);
-            grad.addColorStop(0, `rgba(240, 184, 138, ${p.a})`);
-            grad.addColorStop(1, 'rgba(240, 184, 138, 0)');
-            ctx.fillStyle = grad;
             ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r * 2, 0, Math.PI * 2);
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
             ctx.fill();
         });
 
         requestAnimationFrame(draw);
     };
 
+    document.addEventListener('visibilitychange', () => {
+        running = !document.hidden;
+        if (running) requestAnimationFrame(draw);
+    });
+
     resize();
     init();
     draw();
-    window.addEventListener('resize', () => { resize(); init(); });
+    window.addEventListener('resize', () => { resize(); init(); }, { passive: true });
 }
