@@ -24,6 +24,8 @@ return [
             'tags' => ['Python', 'MediaPipe', 'Laravel', 'Vue.js'],
             'accent' => 'teal',
             'image' => 'images/projects/ergovision.png',
+            'image_fit' => 'contain',
+            'image_position' => 'top center',
             'featured' => true,
             'live' => 'https://ergovision.online',
             'github' => 'https://github.com/v-cyril/ergovision',

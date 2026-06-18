@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="portfolio-body antialiased">
+<body class="portfolio-body portfolio-body--motion antialiased">
 
     <div class="page-loader" id="page-loader" aria-hidden="true">
         <div class="page-loader-inner">
@@ -72,9 +72,9 @@
                         <span class="hero-status-dot"></span>
                         Junior Full-Stack Developer
                     </p>
-                    <h1 class="hero-name animate-in" style="--i:1">
-                        <span class="hero-name-line">V Cyril</span>
-                        <span class="hero-name-line">Darivs <em class="hero-name-accent">Egipto</em></span>
+                    <h1 class="hero-name" id="hero-name">
+                        <span class="hero-name-line" data-split>V Cyril</span>
+                        <span class="hero-name-line" data-split>Darivs <em class="hero-name-accent">Egipto</em></span>
                     </h1>
                     <p class="hero-lead animate-in" style="--i:2">
                         I design and ship full-stack web applications — from REST APIs and dashboards to AI-powered products.
@@ -110,9 +110,13 @@
                             <span class="orbit-bracket orbit-bracket--l">{</span>
                             <span class="orbit-bracket orbit-bracket--r">}</span>
                         </div>
-                        @for ($i = 0; $i < 6; $i++)
-                            <span class="orbit-satellite orbit-satellite--dot" style="--sat-i: {{ $i }}"></span>
-                        @endfor
+                        <div class="orbit-satellites-spin">
+                            @foreach (array_slice(config('portfolio.skills'), 0, 6) as $i => $skill)
+                                <div class="orbit-arm" style="--angle: {{ $i * 60 }}deg">
+                                    <span class="orbit-satellite" style="--sat-color: {{ $skill['color'] }}">{{ $skill['name'] }}</span>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
@@ -149,56 +153,65 @@
                 <h2 class="section-title section-title--sm">Technologies I work with</h2>
             </div>
 
-            <div class="stack-banner">
+            <div class="stack-banner" id="stack-banner">
                 <div class="stack-banner-viewport">
-                    <div class="stack-banner-track">
-                        @foreach (config('portfolio.skills') as $skill)
-                            <span class="stack-chip" style="--chip-color: {{ $skill['color'] }}">
-                                <span class="stack-chip-dot" style="background: {{ $skill['color'] }}"></span>
-                                {{ $skill['name'] }}
-                            </span>
-                        @endforeach
-                        {{-- Seamless loop duplicate (hidden from screen readers) --}}
-                        @foreach (config('portfolio.skills') as $skill)
-                            <span class="stack-chip" style="--chip-color: {{ $skill['color'] }}" aria-hidden="true">
-                                <span class="stack-chip-dot" style="background: {{ $skill['color'] }}"></span>
-                                {{ $skill['name'] }}
-                            </span>
-                        @endforeach
+                    <div class="stack-banner-track" id="stack-banner-track">
+                        <div class="stack-banner-group">
+                            @foreach (config('portfolio.skills') as $i => $skill)
+                                <span class="stack-chip" style="--chip-color: {{ $skill['color'] }}; --chip-i: {{ $i }}">
+                                    <span class="stack-chip-dot" style="background: {{ $skill['color'] }}"></span>
+                                    {{ $skill['name'] }}
+                                </span>
+                            @endforeach
+                        </div>
+                        <div class="stack-banner-group" aria-hidden="true">
+                            @foreach (config('portfolio.skills') as $i => $skill)
+                                <span class="stack-chip" style="--chip-color: {{ $skill['color'] }}; --chip-i: {{ $i }}">
+                                    <span class="stack-chip-dot" style="background: {{ $skill['color'] }}"></span>
+                                    {{ $skill['name'] }}
+                                </span>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         {{-- Projects --}}
-        <section id="projects" class="section section--compact">
+        <section id="projects" class="section section--compact projects-section">
             <div class="container">
                 <div class="section-header reveal">
                     <span class="section-label">Selected work</span>
                     <h2 class="section-title section-title--sm">Projects worth exploring</h2>
                 </div>
 
-                <div class="project-showcase-grid">
+                <div class="project-showcase-grid" id="projects-grid">
                     @foreach (config('portfolio.projects') as $index => $project)
                         @php
                             $imageSlug = pathinfo($project['image'], PATHINFO_FILENAME);
                             $imageFallback = asset('images/projects/'.$imageSlug.'.svg');
+                            $imageFit = $project['image_fit'] ?? 'cover';
+                            $imagePosition = $project['image_position'] ?? 'center';
                         @endphp
                         <article
-                            class="project-showcase project-showcase--{{ $project['accent'] }}{{ ($project['featured'] ?? false) ? ' project-showcase--featured' : '' }} reveal tilt-card"
+                            class="project-showcase project-showcase--{{ $project['accent'] }}{{ ($project['featured'] ?? false) ? ' project-showcase--featured' : '' }} tilt-card project-card-glow"
                             style="--delay: {{ $index * 0.1 }}s"
                         >
                             <div class="project-showcase-inner">
                                 <div class="project-media">
-                                    <img
-                                        src="{{ asset($project['image']) }}"
-                                        alt="{{ $project['name'] }} preview"
-                                        class="project-demo-img"
-                                        data-fallback="{{ $imageFallback }}"
-                                        loading="lazy"
-                                        width="1200"
-                                        height="675"
-                                    >
+                                    <picture>
+                                        <source srcset="{{ asset($project['image']) }}" type="image/png">
+                                        <img
+                                            src="{{ asset($project['image']) }}"
+                                            alt="{{ $project['name'] }} preview"
+                                            class="project-demo-img"
+                                            data-fallback="{{ $imageFallback }}"
+                                            style="object-fit: {{ $imageFit }}; object-position: {{ $imagePosition }};"
+                                            loading="lazy"
+                                            width="1200"
+                                            height="675"
+                                        >
+                                    </picture>
                                     <div class="project-media-shine" aria-hidden="true"></div>
                                     <div class="project-media-meta">
                                         <span class="project-year">{{ $project['year'] }}</span>
@@ -238,10 +251,10 @@
                     <span class="section-label">Contact</span>
                     <h2 class="section-title section-title--sm">Let's build something.</h2>
                     <div class="contact-row">
-                        <a href="mailto:darivsxp@gmail.com" class="contact-pill magnetic">darivsxp@gmail.com</a>
-                        <a href="tel:+639763575830" class="contact-pill magnetic">+63 976 357 5830</a>
-                        <a href="https://linkedin.com/in/v-cyril" target="_blank" rel="noopener" class="contact-pill magnetic">LinkedIn</a>
-                        <a href="https://github.com/v-cyril" target="_blank" rel="noopener" class="contact-pill magnetic">GitHub</a>
+                        <a href="mailto:darivsxp@gmail.com" class="contact-pill magnetic magnetic-strong">darivsxp@gmail.com</a>
+                        <a href="tel:+639763575830" class="contact-pill magnetic magnetic-strong">+63 976 357 5830</a>
+                        <a href="https://linkedin.com/in/v-cyril" target="_blank" rel="noopener" class="contact-pill magnetic magnetic-strong">LinkedIn</a>
+                        <a href="https://github.com/v-cyril" target="_blank" rel="noopener" class="contact-pill magnetic magnetic-strong">GitHub</a>
                     </div>
                 </div>
             </div>

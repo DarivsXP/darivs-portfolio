@@ -1,3 +1,5 @@
+@import 'lenis/dist/lenis.css';
+
 @import 'tailwindcss';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
@@ -227,6 +229,7 @@ html:has(.portfolio-body) {
 
 .section-label {
     display: inline-block;
+    position: relative;
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.14em;
@@ -424,6 +427,18 @@ html:has(.portfolio-body) {
     align-items: center;
     position: relative;
     z-index: 1;
+    overflow: hidden;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 3;
+    min-width: 0;
+}
+
+.hero-char {
+    display: inline-block;
+    transform-origin: bottom center;
 }
 
 .hero-eyebrow {
@@ -560,9 +575,12 @@ html:has(.portfolio-body) {
 .hero-visual {
     position: relative;
     width: 100%;
-    max-width: 360px;
+    max-width: 300px;
     aspect-ratio: 1;
     margin: 0 auto;
+    overflow: hidden;
+    z-index: 1;
+    flex-shrink: 0;
 }
 
 .hero-orbit-system {
@@ -595,13 +613,15 @@ html:has(.portfolio-body) {
 
 .orbit-core {
     position: absolute;
-    inset: 90px;
+    inset: 72px;
     border-radius: 50%;
     background: linear-gradient(135deg, var(--surface-2), var(--surface));
     border: 1px solid var(--border);
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 0.15rem;
+    z-index: 2;
     box-shadow: 0 0 80px rgba(240, 184, 138, 0.2), inset 0 0 40px rgba(167, 139, 250, 0.08);
     animation: pulse-core 4s ease-in-out infinite;
 }
@@ -621,27 +641,35 @@ html:has(.portfolio-body) {
     50% { transform: translateY(-6px); opacity: 1; }
 }
 
+.orbit-satellites-spin {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    animation: spin 26s linear infinite;
+}
+
+.orbit-arm {
+    position: absolute;
+    inset: 0;
+    transform: rotate(var(--angle));
+    pointer-events: none;
+}
+
 .orbit-satellite {
     position: absolute;
-    top: 50%;
+    top: 4%;
     left: 50%;
-    transform: rotate(calc(360deg / 6 * var(--sat-i))) translateY(-155px);
-    transform-origin: 0 0;
-    animation: satellite-orbit 18s linear infinite;
-    animation-delay: calc(var(--sat-i) * -3s);
-}
-
-.orbit-satellite--dot {
-    width: 10px;
-    height: 10px;
-    margin: -5px 0 0 -5px;
-    border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 14px rgba(240, 184, 138, 0.7);
-}
-
-@keyframes satellite-orbit {
-    to { transform: rotate(calc(360deg / 6 * var(--sat-i) + 360deg)) translateY(-155px); }
+    transform: translateX(-50%);
+    padding: 0.28rem 0.55rem;
+    font-size: 0.58rem;
+    font-weight: 700;
+    white-space: nowrap;
+    border-radius: 999px;
+    background: rgba(10, 10, 15, 0.92);
+    border: 1px solid color-mix(in srgb, var(--sat-color) 55%, transparent);
+    color: var(--sat-color);
+    box-shadow: 0 0 14px color-mix(in srgb, var(--sat-color) 35%, transparent);
+    animation: spin 26s linear infinite reverse;
 }
 
 .hero-scroll-hint {
@@ -762,6 +790,12 @@ html:has(.portfolio-body) {
 
 .about-brief-text strong {
     color: var(--text);
+    background: linear-gradient(90deg, var(--accent), var(--violet));
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer-text 5s linear infinite;
 }
 
 /* ─── Stack banner (single, CSS auto-scroll) ─── */
@@ -819,14 +853,20 @@ html:has(.portfolio-body) {
 .stack-banner-track {
     display: flex;
     align-items: center;
-    gap: 1rem;
     width: max-content;
-    animation: stack-banner-scroll 70s linear infinite;
     will-change: transform;
 }
 
+.stack-banner-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
+    padding-right: 1rem;
+}
+
 .stack-banner:hover .stack-banner-track {
-    animation-play-state: paused;
+    filter: brightness(1.05);
 }
 
 .stack-chip {
@@ -844,6 +884,13 @@ html:has(.portfolio-body) {
     border: 1px solid color-mix(in srgb, var(--chip-color) 35%, var(--border));
     box-shadow: 0 0 20px color-mix(in srgb, var(--chip-color) 8%, transparent);
     transition: transform 0.25s, box-shadow 0.25s;
+    animation: stack-chip-pulse 4s ease-in-out infinite;
+    animation-delay: calc(var(--chip-i, 0) * 0.15s);
+}
+
+@keyframes stack-chip-pulse {
+    0%, 100% { box-shadow: 0 0 12px color-mix(in srgb, var(--chip-color) 8%, transparent); }
+    50% { box-shadow: 0 0 28px color-mix(in srgb, var(--chip-color) 22%, transparent); }
 }
 
 .stack-chip:hover {
@@ -857,11 +904,33 @@ html:has(.portfolio-body) {
     border-radius: 50%;
     flex-shrink: 0;
     box-shadow: 0 0 10px currentColor;
+    animation: stack-dot-blink 2s ease-in-out infinite;
+    animation-delay: calc(var(--chip-i, 0) * 0.1s);
 }
 
-@keyframes stack-banner-scroll {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+@keyframes stack-dot-blink {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.65; transform: scale(0.85); }
+}
+
+/* Section label animated underline */
+.section-label::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.visible .section-label::after,
+.about-brief .section-label::after,
+.stack-banner-header .section-label::after {
+    transform: scaleX(1);
 }
 
 /* ─── Project showcase ─── */
@@ -913,10 +982,60 @@ html:has(.portfolio-body) {
     aspect-ratio: 21 / 9;
 }
 
+#main-content {
+    transform-origin: center top;
+    will-change: transform;
+}
+
+/* ─── Projects grid ─── */
+.projects-section {
+    overflow: visible;
+}
+
+.project-showcase {
+    opacity: 1;
+}
+
+.project-card-glow .project-showcase-inner {
+    position: relative;
+}
+
+.project-card-glow .project-showcase-inner::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, var(--accent), var(--violet), var(--teal), var(--accent));
+    background-size: 300% 300%;
+    animation: gradient-border-shift 6s ease infinite;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0.65;
+}
+
+.project-card-glow:hover .project-showcase-inner::before {
+    opacity: 1;
+}
+
+@keyframes gradient-border-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.project-showcase--teal .project-media {
+    background: linear-gradient(180deg, #0f172a 0%, #0a0a0f 100%);
+}
+
 .project-demo-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     display: block;
     transition: transform 0.5s ease;
 }
@@ -1099,16 +1218,11 @@ html:has(.portfolio-body) {
     .hero-typed-wrap { justify-content: center; }
     .hero-actions { justify-content: center; }
     .hero-chips { justify-content: center; }
-    .hero-visual { order: -1; max-width: 260px; }
-    .orbit-core { inset: 70px; }
-    .orbit-ring--2 { inset: 22px; }
-    .orbit-ring--3 { inset: 44px; }
-    .orbit-satellite--dot {
-        transform: rotate(calc(360deg / 6 * var(--sat-i))) translateY(-120px);
-    }
-    @keyframes satellite-orbit {
-        to { transform: rotate(calc(360deg / 6 * var(--sat-i) + 360deg)) translateY(-120px); }
-    }
+    .hero-visual { order: -1; max-width: 240px; }
+    .orbit-core { inset: 58px; }
+    .orbit-ring--2 { inset: 18px; }
+    .orbit-ring--3 { inset: 36px; }
+    .orbit-satellite { font-size: 0.5rem; padding: 0.2rem 0.45rem; }
     .hero-scroll-hint { display: none; }
 }
 
@@ -1149,47 +1263,53 @@ html:has(.portfolio-body) {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .animate-in,
-    .reveal {
+    .portfolio-body:not(.portfolio-body--motion) .animate-in,
+    .portfolio-body:not(.portfolio-body--motion) .reveal {
         opacity: 1;
         transform: none;
         animation: none;
         transition: none;
     }
 
-    .page-loader { display: none; }
+    .portfolio-body:not(.portfolio-body--motion) .page-loader { display: none; }
 
-    .stack-banner-track {
-        animation: none;
+    .portfolio-body:not(.portfolio-body--motion) .stack-banner-track {
         flex-wrap: wrap;
         justify-content: center;
         width: 100%;
         max-width: 1080px;
         margin: 0 auto;
         padding: 0 1.5rem;
+        transform: none !important;
     }
 
-    .stack-banner [aria-hidden="true"] {
+    .portfolio-body:not(.portfolio-body--motion) .stack-banner-group[aria-hidden="true"] {
         display: none;
     }
 
-    .orbit-ring,
-    .orbit-core,
-    .orbit-satellite,
-    .hero-grid,
-    .hero-aurora,
-    .hero-name-accent,
-    .btn-shine,
-    .hero-scroll-hint,
-    .hero-status-dot,
-    .hero-chip--glow { animation: none; }
+    .portfolio-body:not(.portfolio-body--motion) .stack-chip {
+        animation: none;
+    }
 
-    .ambient-orb { animation: none; }
-    .cursor-glow,
-    .cursor-dot,
-    .particle-canvas { display: none; }
+    .portfolio-body:not(.portfolio-body--motion) .orbit-ring,
+    .portfolio-body:not(.portfolio-body--motion) .orbit-core,
+    .portfolio-body:not(.portfolio-body--motion) .orbit-satellites-spin,
+    .portfolio-body:not(.portfolio-body--motion) .orbit-satellite,
+    .portfolio-body:not(.portfolio-body--motion) .hero-grid,
+    .portfolio-body:not(.portfolio-body--motion) .hero-aurora,
+    .portfolio-body:not(.portfolio-body--motion) .hero-name-accent,
+    .portfolio-body:not(.portfolio-body--motion) .btn-shine,
+    .portfolio-body:not(.portfolio-body--motion) .hero-scroll-hint,
+    .portfolio-body:not(.portfolio-body--motion) .hero-status-dot,
+    .portfolio-body:not(.portfolio-body--motion) .hero-chip--glow,
+    .portfolio-body:not(.portfolio-body--motion) .stack-chip-dot { animation: none; }
 
-    .portfolio-body,
-    .portfolio-body a,
-    .portfolio-body button { cursor: auto; }
+    .portfolio-body:not(.portfolio-body--motion) .ambient-orb { animation: none; }
+    .portfolio-body:not(.portfolio-body--motion) .cursor-glow,
+    .portfolio-body:not(.portfolio-body--motion) .cursor-dot,
+    .portfolio-body:not(.portfolio-body--motion) .particle-canvas { display: none; }
+
+    .portfolio-body:not(.portfolio-body--motion),
+    .portfolio-body:not(.portfolio-body--motion) a,
+    .portfolio-body:not(.portfolio-body--motion) button { cursor: auto; }
 }
