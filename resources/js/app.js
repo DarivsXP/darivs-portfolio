@@ -45,21 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     initHeroSplit();
 
-    gsap.utils.toArray('.reveal').forEach((el) => {
-        gsap.from(el, {
-            scrollTrigger: {
-                trigger: el,
-                start: 'top 88%',
-                toggleActions: 'play none none none',
-            },
-            opacity: 0,
-            y: 28,
-            duration: 0.7,
-            ease: 'power2.out',
-            delay: parseFloat(getComputedStyle(el).getPropertyValue('--delay')) || 0,
-            onStart: () => el.classList.add('visible'),
-        });
-    });
+    initReveals();
 
     initTypewriter();
     initProjectCards();
@@ -82,11 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('cursor-dot')?.remove();
     }
 
-    const canvas = document.getElementById('particle-canvas');
-    if (canvas) {
-        initGalaxy(canvas, isNarrow ? 24 : 52, !isNarrow);
-    }
-
     // Active nav (single batch update)
     const sections = document.querySelectorAll('section[id]');
     const navItems = navLinks?.querySelectorAll('a[href^="#"]');
@@ -106,6 +87,57 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+function initReveals() {
+    const elements = gsap.utils.toArray('.reveal');
+    if (!elements.length) return;
+
+    const reveal = (el) => {
+        if (el.classList.contains('visible')) return;
+
+        const delay = parseFloat(getComputedStyle(el).getPropertyValue('--delay')) || 0;
+
+        gsap.fromTo(el,
+            { opacity: 0, y: 28 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.7,
+                ease: 'power2.out',
+                delay,
+                overwrite: true,
+                onStart: () => el.classList.add('visible'),
+                onComplete: () => gsap.set(el, { clearProps: 'opacity,transform' }),
+            },
+        );
+    };
+
+    const showIfInView = () => {
+        elements.forEach((el) => {
+            if (el.classList.contains('visible')) return;
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight * 0.92 && rect.bottom > 0) {
+                gsap.set(el, { opacity: 1, y: 0, clearProps: 'opacity,transform' });
+                el.classList.add('visible');
+            }
+        });
+    };
+
+    elements.forEach((el) => {
+        ScrollTrigger.create({
+            trigger: el,
+            start: 'top 92%',
+            once: true,
+            onEnter: () => reveal(el),
+        });
+    });
+
+    showIfInView();
+    window.addEventListener('load', () => {
+        ScrollTrigger.refresh();
+        showIfInView();
+    }, { once: true });
+}
 
 function initHeroSplit() {
     document.querySelectorAll('[data-split]').forEach((line) => {
@@ -257,85 +289,4 @@ function initCursor() {
         requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);
-}
-
-function initGalaxy(canvas, count, drawLines) {
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-    let w = 0;
-    let h = 0;
-    const linkDist = 115;
-    let running = true;
-    let frame = 0;
-
-    const resize = () => {
-        const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-        w = window.innerWidth;
-        h = window.innerHeight;
-        canvas.width = w * dpr;
-        canvas.height = h * dpr;
-        canvas.style.width = `${w}px`;
-        canvas.style.height = `${h}px`;
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    };
-
-    const init = () => {
-        particles = Array.from({ length: count }, () => ({
-            x: Math.random() * w,
-            y: Math.random() * h,
-            vx: (Math.random() - 0.5) * 0.3,
-            vy: (Math.random() - 0.5) * 0.3,
-            r: Math.random() * 1.4 + 0.5,
-            a: Math.random() * 0.35 + 0.25,
-        }));
-    };
-
-    const draw = () => {
-        if (!running) return;
-        frame++;
-        ctx.clearRect(0, 0, w, h);
-
-        if (drawLines && frame % 2 === 0) {
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const distSq = dx * dx + dy * dy;
-                    if (distSq < linkDist * linkDist) {
-                        const dist = Math.sqrt(distSq);
-                        const alpha = (1 - dist / linkDist) * 0.14;
-                        ctx.strokeStyle = `rgba(200, 170, 255, ${alpha})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.beginPath();
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-        }
-
-        particles.forEach(p => {
-            p.x += p.vx;
-            p.y += p.vy;
-            if (p.x < 0 || p.x > w) p.vx *= -1;
-            if (p.y < 0 || p.y > h) p.vy *= -1;
-            ctx.fillStyle = `rgba(240, 200, 160, ${p.a})`;
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            ctx.fill();
-        });
-
-        requestAnimationFrame(draw);
-    };
-
-    document.addEventListener('visibilitychange', () => {
-        running = !document.hidden;
-        if (running) requestAnimationFrame(draw);
-    });
-
-    resize();
-    init();
-    draw();
-    window.addEventListener('resize', () => { resize(); init(); }, { passive: true });
 }

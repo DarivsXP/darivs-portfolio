@@ -44,10 +44,20 @@ html:has(.portfolio-body) {
     z-index: 0;
     pointer-events: none;
     background:
-        radial-gradient(ellipse 70% 55% at 15% 10%, rgba(88, 28, 135, 0.18), transparent 55%),
-        radial-gradient(ellipse 55% 45% at 85% 20%, rgba(59, 47, 107, 0.14), transparent 50%),
-        radial-gradient(ellipse 50% 40% at 50% 90%, rgba(30, 58, 95, 0.12), transparent 55%),
-        radial-gradient(ellipse 40% 30% at 70% 60%, rgba(240, 184, 138, 0.06), transparent 50%);
+        radial-gradient(ellipse 65% 50% at 20% 15%, rgba(240, 184, 138, 0.14), transparent 55%),
+        radial-gradient(ellipse 50% 45% at 85% 25%, rgba(251, 146, 60, 0.08), transparent 50%),
+        radial-gradient(ellipse 55% 40% at 50% 95%, rgba(180, 83, 9, 0.1), transparent 55%),
+        radial-gradient(ellipse 35% 30% at 70% 55%, rgba(245, 201, 163, 0.06), transparent 50%);
+}
+
+.portfolio-body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse 90% 70% at 50% 40%, rgba(240, 184, 138, 0.04), transparent 65%);
 }
 
 .portfolio-body:has(.cursor-dot) {
@@ -120,12 +130,37 @@ html:has(.portfolio-body) {
 }
 
 /* ─── Effects ─── */
-.particle-canvas {
+.starfield {
     position: fixed;
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    opacity: 0.6;
+    opacity: 0.9;
+    background-image:
+        radial-gradient(1px 1px at 25px 35px, rgba(240, 184, 138, 0.85), transparent),
+        radial-gradient(1px 1px at 95px 75px, rgba(255, 255, 255, 0.45), transparent),
+        radial-gradient(1.5px 1.5px at 155px 25px, rgba(245, 201, 163, 0.7), transparent),
+        radial-gradient(1px 1px at 185px 145px, rgba(255, 255, 255, 0.35), transparent),
+        radial-gradient(1px 1px at 55px 195px, rgba(240, 184, 138, 0.55), transparent),
+        radial-gradient(2px 2px at 130px 110px, rgba(251, 191, 36, 0.45), transparent),
+        radial-gradient(1px 1px at 15px 160px, rgba(255, 255, 255, 0.3), transparent),
+        radial-gradient(1.5px 1.5px at 200px 190px, rgba(240, 184, 138, 0.6), transparent);
+    background-size: 220px 220px;
+    background-repeat: repeat;
+}
+
+.starfield::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(1.5px 1.5px at 40px 60px, rgba(240, 184, 138, 0.5), transparent),
+        radial-gradient(1px 1px at 120px 30px, rgba(255, 255, 255, 0.25), transparent),
+        radial-gradient(2px 2px at 70px 170px, rgba(251, 191, 36, 0.35), transparent),
+        radial-gradient(1px 1px at 180px 90px, rgba(245, 201, 163, 0.4), transparent);
+    background-size: 320px 320px;
+    background-repeat: repeat;
+    opacity: 0.75;
 }
 
 .cursor-glow {
@@ -170,44 +205,34 @@ html:has(.portfolio-body) {
 .ambient-orb {
     position: absolute;
     border-radius: 50%;
-    filter: blur(75px);
-    opacity: 0.24;
+    pointer-events: none;
 }
 
 .ambient-orb--1 {
-    width: 50vw;
-    height: 50vw;
-    max-width: 600px;
-    background: #5b21b6;
-    top: -10%;
-    right: -10%;
-    animation: drift 18s ease-in-out infinite;
+    width: 55vw;
+    height: 55vw;
+    max-width: 640px;
+    top: -15%;
+    right: -12%;
+    background: radial-gradient(circle, rgba(240, 184, 138, 0.12) 0%, transparent 68%);
 }
 
 .ambient-orb--2 {
-    width: 40vw;
-    height: 40vw;
-    max-width: 500px;
-    background: #1e40af;
-    bottom: 10%;
-    left: -15%;
-    animation: drift 22s ease-in-out infinite reverse;
+    width: 45vw;
+    height: 45vw;
+    max-width: 520px;
+    bottom: 5%;
+    left: -18%;
+    background: radial-gradient(circle, rgba(251, 146, 60, 0.08) 0%, transparent 70%);
 }
 
 .ambient-orb--3 {
-    width: 35vw;
-    height: 35vw;
-    max-width: 400px;
-    background: #7c3aed;
-    top: 40%;
-    left: 30%;
-    animation: drift 26s ease-in-out infinite;
-    opacity: 0.14;
-}
-
-@keyframes drift {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(20px, -30px); }
+    width: 38vw;
+    height: 38vw;
+    max-width: 420px;
+    top: 42%;
+    left: 28%;
+    background: radial-gradient(circle, rgba(245, 201, 163, 0.06) 0%, transparent 72%);
 }
 
 /* ─── Layout ─── */
@@ -256,6 +281,34 @@ html:has(.portfolio-body) {
 .section-title--sm {
     font-size: clamp(1.5rem, 3vw, 2rem);
     margin-bottom: 1.5rem;
+}
+
+.section-header {
+    opacity: 1;
+    transform: none;
+    margin-bottom: 1.5rem;
+}
+
+.section-header .section-label::after {
+    transform: scaleX(1);
+}
+
+.section-header .section-title--sm {
+    margin-bottom: 0;
+}
+
+.projects-section .section-header {
+    margin-bottom: 2rem;
+}
+
+.stack-banner-header {
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.contact-header {
+    text-align: center;
+    margin-bottom: 1.25rem;
 }
 
 /* ─── Nav ─── */
@@ -488,13 +541,15 @@ html:has(.portfolio-body) {
     overflow: hidden;
 }
 
-.hero-name-accent {
+.hero-name-accent,
+.hero-name-accent .hero-char {
     font-style: italic;
+    color: var(--accent);
     background: linear-gradient(135deg, var(--accent), #e8d5b7, var(--violet));
     background-size: 200% auto;
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     background-clip: text;
+    -webkit-text-fill-color: transparent;
     animation: shimmer-text 4s linear infinite;
 }
 
@@ -788,6 +843,10 @@ html:has(.portfolio-body) {
 }
 
 /* ─── About brief ─── */
+#about.section--compact {
+    padding-bottom: 2rem;
+}
+
 .about-brief-text {
     font-size: 1.05rem;
     color: var(--text-secondary);
@@ -807,18 +866,10 @@ html:has(.portfolio-body) {
 
 /* ─── Stack banner (CSS scroll — GPU friendly) ─── */
 .stack-banner-section {
-    padding: 1.25rem 0 1.5rem;
+    padding: 0.25rem 0 1.25rem;
     position: relative;
     z-index: 1;
-}
-
-.stack-banner-header {
-    text-align: center;
-    margin-bottom: 0.65rem;
-}
-
-.stack-banner-header .section-title {
-    margin-bottom: 0;
+    scroll-margin-top: 5rem;
 }
 
 .stack-banner {
@@ -923,7 +974,7 @@ html:has(.portfolio-body) {
 
 .reveal.visible .section-label::after,
 .about-brief .section-label::after,
-.stack-banner-header .section-label::after {
+.section-header .section-label::after {
     transform: scaleX(1);
 }
 
@@ -983,6 +1034,7 @@ html:has(.portfolio-body) {
 /* ─── Projects grid ─── */
 .projects-section {
     overflow: visible;
+    scroll-margin-top: 5rem;
 }
 
 .project-showcase--teal .project-media {
@@ -1021,21 +1073,9 @@ html:has(.portfolio-body) {
     right: 1rem;
     bottom: 1rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     gap: 0.75rem;
-}
-
-.project-year {
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    padding: 0.3rem 0.65rem;
-    border-radius: 999px;
-    background: rgba(0, 0, 0, 0.55);
-    backdrop-filter: blur(8px);
-    color: var(--text);
-    border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .project-tagline {
@@ -1060,7 +1100,15 @@ html:has(.portfolio-body) {
     font-family: var(--font-display);
     font-size: clamp(1.35rem, 2.5vw, 1.75rem);
     font-weight: 400;
-    margin-bottom: 0.45rem;
+    margin-bottom: 0.35rem;
+}
+
+.project-subtitle {
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--accent);
+    margin-bottom: 0.65rem;
+    line-height: 1.45;
 }
 
 .project-desc {
@@ -1069,6 +1117,20 @@ html:has(.portfolio-body) {
     line-height: 1.65;
     margin-bottom: 1rem;
     flex-grow: 1;
+}
+
+.project-tech {
+    margin-bottom: 1rem;
+}
+
+.project-tech-label {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.55rem;
 }
 
 .project-links {
@@ -1109,11 +1171,16 @@ html:has(.portfolio-body) {
 }
 
 /* ─── Contact ─── */
+.contact--compact {
+    padding-bottom: 4.5rem;
+    scroll-margin-top: 5rem;
+}
+
 .contact-minimal {
     text-align: center;
 }
 
-.contact-row {
+.contact-minimal .contact-row {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -1256,10 +1323,8 @@ html:has(.portfolio-body) {
     .portfolio-body:not(.portfolio-body--motion) .hero-chip--glow,
     .portfolio-body:not(.portfolio-body--motion) .stack-chip-dot { animation: none; }
 
-    .portfolio-body:not(.portfolio-body--motion) .ambient-orb { animation: none; }
     .portfolio-body:not(.portfolio-body--motion) .cursor-glow,
-    .portfolio-body:not(.portfolio-body--motion) .cursor-dot,
-    .portfolio-body:not(.portfolio-body--motion) .particle-canvas { display: none; }
+    .portfolio-body:not(.portfolio-body--motion) .cursor-dot { display: none; }
 
     .portfolio-body:not(.portfolio-body--motion),
     .portfolio-body:not(.portfolio-body--motion) a,

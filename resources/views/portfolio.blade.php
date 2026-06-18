@@ -25,7 +25,7 @@
         </div>
     </div>
 
-    <canvas id="particle-canvas" class="particle-canvas" aria-hidden="true"></canvas>
+    <div class="starfield" aria-hidden="true"></div>
     <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
     <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
 
@@ -148,7 +148,7 @@
 
         {{-- Stack banner (single instance, auto-scroll) --}}
         <section id="stack" class="stack-banner-section" aria-label="Tech stack">
-            <div class="container stack-banner-header reveal">
+            <div class="container section-header stack-banner-header">
                 <span class="section-label">Stack</span>
                 <h2 class="section-title section-title--sm">Technologies I work with</h2>
             </div>
@@ -180,9 +180,9 @@
         {{-- Projects --}}
         <section id="projects" class="section section--compact projects-section">
             <div class="container">
-                <div class="section-header reveal">
-                    <span class="section-label">Selected work</span>
-                    <h2 class="section-title section-title--sm">Projects worth exploring</h2>
+                <div class="section-header">
+                    <span class="section-label">Projects</span>
+                    <h2 class="section-title section-title--sm">Selected work</h2>
                 </div>
 
                 <div class="project-showcase-grid" id="projects-grid">
@@ -214,17 +214,22 @@
                                     </picture>
                                     <div class="project-media-shine" aria-hidden="true"></div>
                                     <div class="project-media-meta">
-                                        <span class="project-year">{{ $project['year'] }}</span>
                                         <span class="project-tagline">{{ $project['tagline'] }}</span>
                                     </div>
                                 </div>
                                 <div class="project-body">
                                     <h3 class="project-title">{{ $project['name'] }}</h3>
+                                    @if (! empty($project['subtitle']))
+                                        <p class="project-subtitle">{{ $project['subtitle'] }}</p>
+                                    @endif
                                     <p class="project-desc">{{ $project['description'] }}</p>
-                                    <div class="tag-row">
+                                    <div class="project-tech">
+                                        <span class="project-tech-label">Technologies used</span>
+                                        <div class="tag-row">
                                         @foreach ($project['tags'] as $tag)
                                             <span class="tag">{{ $tag }}</span>
                                         @endforeach
+                                        </div>
                                     </div>
                                     <div class="project-links">
                                         @if ($project['live'])
@@ -247,9 +252,11 @@
         {{-- Contact --}}
         <section id="contact" class="section section--compact contact--compact">
             <div class="container narrow">
-                <div class="contact-minimal reveal">
+                <div class="section-header contact-header">
                     <span class="section-label">Contact</span>
                     <h2 class="section-title section-title--sm">Let's build something.</h2>
+                </div>
+                <div class="contact-minimal">
                     <div class="contact-row">
                         <a href="mailto:darivsxp@gmail.com" class="contact-pill magnetic magnetic-strong">darivsxp@gmail.com</a>
                         <a href="tel:+639763575830" class="contact-pill magnetic magnetic-strong">+63 976 357 5830</a>
