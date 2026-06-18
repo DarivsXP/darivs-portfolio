@@ -110,27 +110,9 @@
                             <span class="orbit-bracket orbit-bracket--l">{</span>
                             <span class="orbit-bracket orbit-bracket--r">}</span>
                         </div>
-                        @foreach (array_slice(config('portfolio.skills'), 0, 6) as $i => $skill)
-                            <span
-                                class="orbit-satellite"
-                                style="--sat-i: {{ $i }}; --sat-color: {{ $skill['color'] }}"
-                            >{{ $skill['name'] }}</span>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-
-            {{-- Hero tech carousel --}}
-            <div class="hero-tech-strip" aria-label="Technologies preview">
-                <div class="tech-carousel tech-carousel--hero" data-speed="0.6">
-                    <div class="tech-carousel-track">
-                        @foreach (array_merge(config('portfolio.skills'), config('portfolio.skills')) as $skill)
-                            <div class="tech-card" style="--tech-color: {{ $skill['color'] }}">
-                                <span class="tech-card-glow"></span>
-                                <span class="tech-card-icon" style="background: {{ $skill['color'] }}20; color: {{ $skill['color'] }}">{{ strtoupper(substr($skill['name'], 0, 2)) }}</span>
-                                <span class="tech-card-name">{{ $skill['name'] }}</span>
-                            </div>
-                        @endforeach
+                        @for ($i = 0; $i < 6; $i++)
+                            <span class="orbit-satellite orbit-satellite--dot" style="--sat-i: {{ $i }}"></span>
+                        @endfor
                     </div>
                 </div>
             </div>
@@ -160,62 +142,28 @@
             </div>
         </section>
 
-        {{-- Stack: 3D ring + infinite carousels --}}
-        @php
-            $skills = config('portfolio.skills');
-            $skillTotal = count($skills);
-            $skillsDup = array_merge($skills, $skills);
-            $skillsRev = array_merge(array_reverse($skills), array_reverse($skills));
-        @endphp
-        <section id="stack" class="stack-section" aria-label="Tech stack">
-            <div class="container stack-section-header reveal">
+        {{-- Stack banner (single instance, auto-scroll) --}}
+        <section id="stack" class="stack-banner-section" aria-label="Tech stack">
+            <div class="container stack-banner-header reveal">
                 <span class="section-label">Stack</span>
                 <h2 class="section-title section-title--sm">Technologies I work with</h2>
-                <p class="stack-banner-sub">Drag the carousel · hover to pause</p>
             </div>
 
-            <div class="tech-ring-wrap reveal" style="--delay: 0.1s">
-                <div class="tech-ring-carousel" id="tech-ring">
-                    <div class="tech-ring-stage">
-                        @foreach ($skills as $i => $skill)
-                            <div
-                                class="tech-ring-item"
-                                style="--i: {{ $i }}; --total: {{ $skillTotal }}; --tech-color: {{ $skill['color'] }}"
-                            >
-                                <span class="tech-ring-item-inner">{{ $skill['name'] }}</span>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-
-            <div class="stack-carousel-lanes">
-                <div class="tech-carousel tech-carousel--lane" data-speed="0.45" data-direction="1">
-                    <div class="tech-carousel-track">
-                        @foreach ($skillsDup as $skill)
-                            <div class="tech-card tech-card--compact" style="--tech-color: {{ $skill['color'] }}">
-                                <span class="tech-card-dot" style="background: {{ $skill['color'] }}"></span>
-                                <span class="tech-card-name">{{ $skill['name'] }}</span>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-                <div class="tech-carousel tech-carousel--lane" data-speed="0.55" data-direction="-1">
-                    <div class="tech-carousel-track">
-                        @foreach ($skillsRev as $skill)
-                            <div class="tech-card tech-card--compact" style="--tech-color: {{ $skill['color'] }}">
-                                <span class="tech-card-dot" style="background: {{ $skill['color'] }}"></span>
-                                <span class="tech-card-name">{{ $skill['name'] }}</span>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-                <div class="tech-carousel tech-carousel--lane" data-speed="0.35" data-direction="1">
-                    <div class="tech-carousel-track">
-                        @foreach ($skillsDup as $skill)
-                            <div class="tech-card tech-card--pill" style="--tech-color: {{ $skill['color'] }}">
+            <div class="stack-banner">
+                <div class="stack-banner-viewport">
+                    <div class="stack-banner-track">
+                        @foreach (config('portfolio.skills') as $skill)
+                            <span class="stack-chip" style="--chip-color: {{ $skill['color'] }}">
+                                <span class="stack-chip-dot" style="background: {{ $skill['color'] }}"></span>
                                 {{ $skill['name'] }}
-                            </div>
+                            </span>
+                        @endforeach
+                        {{-- Seamless loop duplicate (hidden from screen readers) --}}
+                        @foreach (config('portfolio.skills') as $skill)
+                            <span class="stack-chip" style="--chip-color: {{ $skill['color'] }}" aria-hidden="true">
+                                <span class="stack-chip-dot" style="background: {{ $skill['color'] }}"></span>
+                                {{ $skill['name'] }}
+                            </span>
                         @endforeach
                     </div>
                 </div>

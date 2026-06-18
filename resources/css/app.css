@@ -625,33 +625,23 @@ html:has(.portfolio-body) {
     position: absolute;
     top: 50%;
     left: 50%;
-    margin: -14px 0 0 -40px;
-    padding: 0.3rem 0.65rem;
-    font-size: 0.65rem;
-    font-weight: 700;
-    white-space: nowrap;
-    border-radius: 999px;
-    background: rgba(10, 10, 15, 0.85);
-    border: 1px solid color-mix(in srgb, var(--sat-color) 50%, transparent);
-    color: var(--sat-color);
-    box-shadow: 0 0 16px color-mix(in srgb, var(--sat-color) 30%, transparent);
-    transform: rotate(calc(360deg / 6 * var(--sat-i))) translateY(-155px) rotate(calc(-360deg / 6 * var(--sat-i)));
-    transform-origin: 40px 155px;
+    transform: rotate(calc(360deg / 6 * var(--sat-i))) translateY(-155px);
+    transform-origin: 0 0;
     animation: satellite-orbit 18s linear infinite;
     animation-delay: calc(var(--sat-i) * -3s);
 }
 
-@keyframes satellite-orbit {
-    to { transform: rotate(calc(360deg / 6 * var(--sat-i) + 360deg)) translateY(-155px) rotate(calc(-360deg / 6 * var(--sat-i) - 360deg)); }
+.orbit-satellite--dot {
+    width: 10px;
+    height: 10px;
+    margin: -5px 0 0 -5px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 14px rgba(240, 184, 138, 0.7);
 }
 
-.hero-tech-strip {
-    position: relative;
-    z-index: 1;
-    margin-top: 3rem;
-    padding: 1rem 0;
-    border-top: 1px solid var(--border);
-    background: linear-gradient(180deg, rgba(18, 18, 26, 0.6), transparent);
+@keyframes satellite-orbit {
+    to { transform: rotate(calc(360deg / 6 * var(--sat-i) + 360deg)) translateY(-155px); }
 }
 
 .hero-scroll-hint {
@@ -774,197 +764,104 @@ html:has(.portfolio-body) {
     color: var(--text);
 }
 
-/* ─── Stack section + tech carousels ─── */
-.stack-section {
-    padding: 4rem 0 3.5rem;
+/* ─── Stack banner (single, CSS auto-scroll) ─── */
+.stack-banner-section {
+    padding: 3rem 0 3.5rem;
     position: relative;
     z-index: 1;
+}
+
+.stack-banner-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.stack-banner-header .section-title {
+    margin-bottom: 0;
+}
+
+.stack-banner {
+    position: relative;
+    padding: 1.35rem 0;
+    border-block: 1px solid var(--border);
+    background:
+        linear-gradient(90deg, rgba(240, 184, 138, 0.05), transparent 40%, transparent 60%, rgba(167, 139, 250, 0.05)),
+        var(--surface);
     overflow: hidden;
 }
 
-.stack-section-header {
-    text-align: center;
-    margin-bottom: 2.5rem;
-}
-
-.stack-section-header .section-title {
-    margin-bottom: 0.5rem;
-}
-
-.stack-banner-sub {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    margin: 0;
-}
-
-.tech-ring-wrap {
-    perspective: 1000px;
-    height: 220px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 2.5rem;
-    position: relative;
-}
-
-.tech-ring-wrap::before {
+.stack-banner::before,
+.stack-banner::after {
     content: '';
     position: absolute;
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(240, 184, 138, 0.12), transparent 70%);
+    top: 0;
+    bottom: 0;
+    width: 100px;
+    z-index: 2;
     pointer-events: none;
 }
 
-.tech-ring-carousel {
-    width: 100%;
-    max-width: 700px;
-    height: 200px;
-    position: relative;
+.stack-banner::before {
+    left: 0;
+    background: linear-gradient(90deg, var(--bg), transparent);
 }
 
-.tech-ring-stage {
-    position: absolute;
-    inset: 0;
-    transform-style: preserve-3d;
-    animation: ring-spin 35s linear infinite;
+.stack-banner::after {
+    right: 0;
+    background: linear-gradient(270deg, var(--bg), transparent);
 }
 
-.tech-ring-stage.is-paused {
-    animation-play-state: paused;
-}
-
-.tech-ring-item {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 110px;
-    margin: -24px 0 0 -55px;
-    transform: rotateY(calc(360deg / var(--total) * var(--i))) translateZ(240px);
-    backface-visibility: hidden;
-}
-
-.tech-ring-item-inner {
-    display: block;
-    padding: 0.5rem 0.85rem;
-    text-align: center;
-    font-size: 0.78rem;
-    font-weight: 700;
-    border-radius: 0.75rem;
-    background: rgba(18, 18, 26, 0.9);
-    border: 1px solid color-mix(in srgb, var(--tech-color) 45%, transparent);
-    color: var(--tech-color);
-    box-shadow: 0 0 20px color-mix(in srgb, var(--tech-color) 20%, transparent);
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.tech-ring-item:hover .tech-ring-item-inner {
-    transform: scale(1.1);
-    box-shadow: 0 0 30px color-mix(in srgb, var(--tech-color) 40%, transparent);
-}
-
-@keyframes ring-spin {
-    to { transform: rotateY(360deg); }
-}
-
-.stack-carousel-lanes {
-    display: flex;
-    flex-direction: column;
-    gap: 0.85rem;
-}
-
-.tech-carousel {
+.stack-banner-viewport {
     overflow: hidden;
-    cursor: grab;
-    user-select: none;
-    touch-action: pan-y;
-    mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+    width: 100%;
 }
 
-.tech-carousel:active {
-    cursor: grabbing;
-}
-
-.tech-carousel-track {
+.stack-banner-track {
     display: flex;
-    gap: 0.85rem;
+    align-items: center;
+    gap: 1rem;
     width: max-content;
+    animation: stack-banner-scroll 70s linear infinite;
     will-change: transform;
 }
 
-.tech-card {
-    position: relative;
-    display: flex;
+.stack-banner:hover .stack-banner-track {
+    animation-play-state: paused;
+}
+
+.stack-chip {
+    display: inline-flex;
     align-items: center;
-    gap: 0.65rem;
+    gap: 0.55rem;
     flex-shrink: 0;
-    padding: 0.75rem 1.15rem;
-    border-radius: 1rem;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
-}
-
-.tech-card:hover {
-    transform: translateY(-3px) scale(1.02);
-    border-color: color-mix(in srgb, var(--tech-color) 50%, transparent);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35), 0 0 24px color-mix(in srgb, var(--tech-color) 15%, transparent);
-}
-
-.tech-card-glow {
-    position: absolute;
-    inset: -1px;
-    border-radius: inherit;
-    background: linear-gradient(135deg, var(--tech-color), transparent);
-    opacity: 0;
-    transition: opacity 0.3s;
-    z-index: -1;
-}
-
-.tech-card:hover .tech-card-glow {
-    opacity: 0.15;
-}
-
-.tech-card-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    border-radius: 0.6rem;
-    font-size: 0.7rem;
-    font-weight: 800;
-    letter-spacing: -0.02em;
-}
-
-.tech-card-name {
-    font-size: 0.88rem;
-    font-weight: 600;
-    white-space: nowrap;
-}
-
-.tech-card--compact {
-    padding: 0.55rem 1rem;
+    padding: 0.6rem 1.2rem;
     border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text);
+    white-space: nowrap;
+    background: var(--surface-2);
+    border: 1px solid color-mix(in srgb, var(--chip-color) 35%, var(--border));
+    box-shadow: 0 0 20px color-mix(in srgb, var(--chip-color) 8%, transparent);
+    transition: transform 0.25s, box-shadow 0.25s;
 }
 
-.tech-card-dot {
+.stack-chip:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 24px color-mix(in srgb, var(--chip-color) 25%, transparent);
+}
+
+.stack-chip-dot {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    box-shadow: 0 0 10px currentColor;
     flex-shrink: 0;
+    box-shadow: 0 0 10px currentColor;
 }
 
-.tech-card--pill {
-    padding: 0.45rem 1rem;
-    border-radius: 999px;
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--tech-color);
-    background: color-mix(in srgb, var(--tech-color) 8%, var(--surface));
-    border-color: color-mix(in srgb, var(--tech-color) 25%, transparent);
+@keyframes stack-banner-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
 }
 
 /* ─── Project showcase ─── */
@@ -1206,15 +1103,12 @@ html:has(.portfolio-body) {
     .orbit-core { inset: 70px; }
     .orbit-ring--2 { inset: 22px; }
     .orbit-ring--3 { inset: 44px; }
-    .orbit-satellite {
-        transform: rotate(calc(360deg / 6 * var(--sat-i))) translateY(-120px) rotate(calc(-360deg / 6 * var(--sat-i)));
-        transform-origin: 40px 120px;
-        font-size: 0.58rem;
+    .orbit-satellite--dot {
+        transform: rotate(calc(360deg / 6 * var(--sat-i))) translateY(-120px);
     }
     @keyframes satellite-orbit {
-        to { transform: rotate(calc(360deg / 6 * var(--sat-i) + 360deg)) translateY(-120px) rotate(calc(-360deg / 6 * var(--sat-i) - 360deg)); }
+        to { transform: rotate(calc(360deg / 6 * var(--sat-i) + 360deg)) translateY(-120px); }
     }
-    .tech-ring-item { transform: rotateY(calc(360deg / var(--total) * var(--i))) translateZ(160px); }
     .hero-scroll-hint { display: none; }
 }
 
@@ -1265,7 +1159,20 @@ html:has(.portfolio-body) {
 
     .page-loader { display: none; }
 
-    .tech-ring-stage,
+    .stack-banner-track {
+        animation: none;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+    }
+
+    .stack-banner [aria-hidden="true"] {
+        display: none;
+    }
+
     .orbit-ring,
     .orbit-core,
     .orbit-satellite,

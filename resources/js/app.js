@@ -109,19 +109,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Infinite tech carousels
-    document.querySelectorAll('.tech-carousel').forEach(carousel => {
-        initInfiniteCarousel(carousel, prefersReducedMotion);
-    });
-
-    // 3D ring pause on hover
-    const techRing = document.getElementById('tech-ring');
-    if (techRing && !prefersReducedMotion) {
-        const stage = techRing.querySelector('.tech-ring-stage');
-        techRing.addEventListener('mouseenter', () => stage?.classList.add('is-paused'));
-        techRing.addEventListener('mouseleave', () => stage?.classList.remove('is-paused'));
-    }
-
     // Project image fallback
     document.querySelectorAll('.project-demo-img').forEach(img => {
         img.addEventListener('error', () => {
@@ -177,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        document.querySelectorAll('a, button, .tilt-card, .tech-card').forEach(el => {
+        document.querySelectorAll('a, button, .tilt-card').forEach(el => {
             el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
             el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
         });
@@ -223,77 +210,6 @@ document.addEventListener('DOMContentLoaded', () => {
         sections.forEach(section => sectionObserver.observe(section));
     }
 });
-
-function initInfiniteCarousel(root, reducedMotion) {
-    const track = root.querySelector('.tech-carousel-track');
-    if (!track) return;
-
-    const speed = parseFloat(root.dataset.speed || '0.5');
-    const direction = parseInt(root.dataset.direction || '1', 10);
-
-    const items = [...track.children];
-    items.forEach(item => track.appendChild(item.cloneNode(true)));
-
-    let position = 0;
-    let paused = false;
-    let dragging = false;
-    let dragStartX = 0;
-    let dragStartPos = 0;
-
-    const halfWidth = () => track.scrollWidth / 2;
-
-    requestAnimationFrame(() => {
-        if (direction === -1) position = -halfWidth();
-    });
-
-    const onPointerDown = (e) => {
-        dragging = true;
-        paused = true;
-        dragStartX = e.clientX ?? e.touches?.[0]?.clientX ?? 0;
-        dragStartPos = position;
-        velocity = 0;
-        track.setPointerCapture?.(e.pointerId);
-    };
-
-    const onPointerMove = (e) => {
-        if (!dragging) return;
-        const x = e.clientX ?? e.touches?.[0]?.clientX ?? 0;
-        const delta = x - dragStartX;
-        position = dragStartPos + delta;
-    };
-
-    const onPointerUp = () => {
-        dragging = false;
-        setTimeout(() => { paused = false; }, 800);
-    };
-
-    root.addEventListener('pointerdown', onPointerDown);
-    root.addEventListener('pointermove', onPointerMove);
-    root.addEventListener('pointerup', onPointerUp);
-    root.addEventListener('pointerleave', onPointerUp);
-    root.addEventListener('mouseenter', () => { paused = true; });
-    root.addEventListener('mouseleave', () => { if (!dragging) paused = false; });
-
-    if (reducedMotion) {
-        track.style.transform = 'translateX(0)';
-        return;
-    }
-
-    const animate = () => {
-        if (!dragging && !paused) {
-            position -= speed * direction;
-        }
-        const half = halfWidth();
-        if (half > 0) {
-            if (direction === 1 && position <= -half) position += half;
-            if (direction === -1 && position >= 0) position -= half;
-        }
-        track.style.transform = `translate3d(${position}px, 0, 0)`;
-        requestAnimationFrame(animate);
-    };
-
-    requestAnimationFrame(animate);
-}
 
 function initConstellation(canvas) {
     const ctx = canvas.getContext('2d');
