@@ -194,7 +194,7 @@
                             $imagePosition = $project['image_position'] ?? 'center';
                         @endphp
                         <article
-                            class="project-showcase project-showcase--{{ $project['accent'] }}{{ ($project['featured'] ?? false) ? ' project-showcase--featured' : '' }} tilt-card project-card-glow"
+                            class="project-showcase project-showcase--{{ $project['accent'] }}{{ ($project['featured'] ?? false) ? ' project-showcase--featured' : '' }}"
                             style="--delay: {{ $index * 0.1 }}s"
                         >
                             <div class="project-showcase-inner">

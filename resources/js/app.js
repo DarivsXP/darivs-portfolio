@@ -75,15 +75,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     if (enableFx) {
-        initTiltCards();
         initMagnetic();
         initCursor();
-        const canvas = document.getElementById('particle-canvas');
-        if (canvas) initParticles(canvas);
     } else {
         document.getElementById('cursor-glow')?.remove();
         document.getElementById('cursor-dot')?.remove();
-        document.getElementById('particle-canvas')?.remove();
+    }
+
+    const canvas = document.getElementById('particle-canvas');
+    if (canvas) {
+        initGalaxy(canvas, isNarrow ? 24 : 52, !isNarrow);
     }
 
     // Active nav (single batch update)
@@ -209,20 +210,6 @@ function initProjectCards() {
     });
 }
 
-function initTiltCards() {
-    document.querySelectorAll('.tilt-card').forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = (e.clientX - rect.left) / rect.width - 0.5;
-            const y = (e.clientY - rect.top) / rect.height - 0.5;
-            card.style.transform = `perspective(900px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg) translateY(-4px)`;
-        }, { passive: true });
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = '';
-        });
-    });
-}
-
 function initMagnetic() {
     document.querySelectorAll('.magnetic').forEach(btn => {
         const strength = btn.classList.contains('magnetic-strong') ? 0.28 : 0.16;
@@ -253,7 +240,7 @@ function initCursor() {
         my = e.clientY;
     }, { passive: true });
 
-    document.querySelectorAll('a, button, .tilt-card').forEach(el => {
+    document.querySelectorAll('a, button').forEach(el => {
         el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
         el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
     });
@@ -262,7 +249,7 @@ function initCursor() {
         gx += (mx - gx) * 0.12;
         gy += (my - gy) * 0.12;
         if (glow) {
-            glow.style.transform = `translate3d(${gx - 210}px, ${gy - 210}px, 0)`;
+            glow.style.transform = `translate3d(${gx - 160}px, ${gy - 160}px, 0)`;
         }
         if (dot) {
             dot.style.transform = `translate3d(${mx - 4}px, ${my - 4}px, 0)`;
@@ -272,13 +259,14 @@ function initCursor() {
     requestAnimationFrame(tick);
 }
 
-function initParticles(canvas) {
+function initGalaxy(canvas, count, drawLines) {
     const ctx = canvas.getContext('2d');
     let particles = [];
     let w = 0;
     let h = 0;
-    const count = 28;
+    const linkDist = 115;
     let running = true;
+    let frame = 0;
 
     const resize = () => {
         const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
@@ -295,22 +283,44 @@ function initParticles(canvas) {
         particles = Array.from({ length: count }, () => ({
             x: Math.random() * w,
             y: Math.random() * h,
-            vx: (Math.random() - 0.5) * 0.25,
-            vy: (Math.random() - 0.5) * 0.25,
-            r: Math.random() * 1.2 + 0.5,
+            vx: (Math.random() - 0.5) * 0.3,
+            vy: (Math.random() - 0.5) * 0.3,
+            r: Math.random() * 1.4 + 0.5,
+            a: Math.random() * 0.35 + 0.25,
         }));
     };
 
     const draw = () => {
         if (!running) return;
+        frame++;
         ctx.clearRect(0, 0, w, h);
-        ctx.fillStyle = 'rgba(240, 184, 138, 0.45)';
+
+        if (drawLines && frame % 2 === 0) {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distSq = dx * dx + dy * dy;
+                    if (distSq < linkDist * linkDist) {
+                        const dist = Math.sqrt(distSq);
+                        const alpha = (1 - dist / linkDist) * 0.14;
+                        ctx.strokeStyle = `rgba(200, 170, 255, ${alpha})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
 
         particles.forEach(p => {
             p.x += p.vx;
             p.y += p.vy;
             if (p.x < 0 || p.x > w) p.vx *= -1;
             if (p.y < 0 || p.y > h) p.vy *= -1;
+            ctx.fillStyle = `rgba(240, 200, 160, ${p.a})`;
             ctx.beginPath();
             ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
             ctx.fill();

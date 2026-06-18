@@ -37,6 +37,19 @@ html:has(.portfolio-body) {
     cursor: default;
 }
 
+.portfolio-body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse 70% 55% at 15% 10%, rgba(88, 28, 135, 0.18), transparent 55%),
+        radial-gradient(ellipse 55% 45% at 85% 20%, rgba(59, 47, 107, 0.14), transparent 50%),
+        radial-gradient(ellipse 50% 40% at 50% 90%, rgba(30, 58, 95, 0.12), transparent 55%),
+        radial-gradient(ellipse 40% 30% at 70% 60%, rgba(240, 184, 138, 0.06), transparent 50%);
+}
+
 .portfolio-body:has(.cursor-dot) {
     cursor: none;
 }
@@ -112,7 +125,7 @@ html:has(.portfolio-body) {
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    opacity: 0.35;
+    opacity: 0.6;
 }
 
 .cursor-glow {
@@ -157,15 +170,15 @@ html:has(.portfolio-body) {
 .ambient-orb {
     position: absolute;
     border-radius: 50%;
-    filter: blur(60px);
-    opacity: 0.16;
+    filter: blur(75px);
+    opacity: 0.24;
 }
 
 .ambient-orb--1 {
     width: 50vw;
     height: 50vw;
     max-width: 600px;
-    background: #3b2f6b;
+    background: #5b21b6;
     top: -10%;
     right: -10%;
     animation: drift 18s ease-in-out infinite;
@@ -175,7 +188,7 @@ html:has(.portfolio-body) {
     width: 40vw;
     height: 40vw;
     max-width: 500px;
-    background: #1e3a5f;
+    background: #1e40af;
     bottom: 10%;
     left: -15%;
     animation: drift 22s ease-in-out infinite reverse;
@@ -185,11 +198,11 @@ html:has(.portfolio-body) {
     width: 35vw;
     height: 35vw;
     max-width: 400px;
-    background: #4a2c2a;
+    background: #7c3aed;
     top: 40%;
     left: 30%;
     animation: drift 26s ease-in-out infinite;
-    opacity: 0.12;
+    opacity: 0.14;
 }
 
 @keyframes drift {
@@ -923,8 +936,7 @@ html:has(.portfolio-body) {
 
 .project-showcase {
     border-radius: 1.35rem;
-    transition: transform 0.15s ease;
-    will-change: transform;
+    opacity: 1;
 }
 
 .project-showcase--featured {
@@ -939,12 +951,13 @@ html:has(.portfolio-body) {
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    transition: border-color 0.3s, box-shadow 0.3s;
+    transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
 }
 
 .project-showcase:hover .project-showcase-inner {
+    transform: translateY(-3px);
     border-color: rgba(255, 255, 255, 0.14);
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
 }
 
 .project-showcase--violet:hover .project-showcase-inner { border-color: rgba(167, 139, 250, 0.4); }
@@ -972,41 +985,6 @@ html:has(.portfolio-body) {
     overflow: visible;
 }
 
-.project-showcase {
-    opacity: 1;
-}
-
-.project-card-glow .project-showcase-inner {
-    position: relative;
-}
-
-.project-card-glow .project-showcase-inner::before {
-    content: '';
-    position: absolute;
-    inset: -1px;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(135deg, var(--accent), var(--violet), var(--teal), var(--accent));
-    background-size: 300% 300%;
-    animation: gradient-border-shift 6s ease infinite;
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
-    z-index: 2;
-    opacity: 0.65;
-}
-
-.project-card-glow:hover .project-showcase-inner::before {
-    opacity: 1;
-}
-
-@keyframes gradient-border-shift {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-}
-
 .project-showcase--teal .project-media {
     background: linear-gradient(180deg, #0f172a 0%, #0a0a0f 100%);
 }
@@ -1021,7 +999,7 @@ html:has(.portfolio-body) {
 }
 
 .project-showcase:hover .project-demo-img {
-    transform: scale(1.04);
+    transform: scale(1.02);
 }
 
 .project-media-shine {
