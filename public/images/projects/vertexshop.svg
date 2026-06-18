@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-label="VertexShop preview">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#a78bfa"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="675" fill="url(#g)"/>
+  <rect width="1200" height="675" fill="url(#grid)"/>
+  <rect x="80" y="60" width="1040" height="555" rx="20" fill="rgba(0,0,0,0.25)" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+  <rect x="120" y="110" width="320" height="24" rx="6" fill="rgba(255,255,255,0.2)"/>
+  <rect x="120" y="160" width="480" height="16" rx="4" fill="rgba(255,255,255,0.12)"/>
+  <rect x="120" y="190" width="400" height="16" rx="4" fill="rgba(255,255,255,0.1)"/>
+  <rect x="120" y="250" width="200" height="140" rx="12" fill="rgba(255,255,255,0.15)"/>
+  <rect x="340" y="250" width="200" height="140" rx="12" fill="rgba(255,255,255,0.12)"/>
+  <rect x="560" y="250" width="200" height="140" rx="12" fill="rgba(255,255,255,0.1)"/>
+  <text x="600" y="520" text-anchor="middle" fill="#ffffff" font-family="system-ui,sans-serif" font-size="42" font-weight="700">VertexShop</text>
+  <text x="600" y="565" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-family="system-ui,sans-serif" font-size="20">Replace with screenshot in public/images/projects/vertexshop.png</text>
+</svg>
