@@ -5,17 +5,6 @@ return [
 
     'projects' => [
         [
-            'name' => 'VertexShop',
-            'tagline' => 'E-commerce platform',
-            'description' => 'A full-stack e-commerce platform with user authentication, product catalog, cart, wishlist, mock checkout, and order tracking. Includes an admin dashboard for inventory and orders, REST APIs with Laravel Sanctum, and a responsive Vue.js storefront.',
-            'tags' => ['Laravel', 'Vue.js', 'MySQL', 'Sanctum', 'REST API', 'Tailwind CSS'],
-            'accent' => 'violet',
-            'image' => 'images/projects/vertexshop.png',
-            'featured' => true,
-            'live' => 'https://vertexshop.cyrilegipto.space',
-            'github' => 'https://github.com/DarivsXP/VertexShop',
-        ],
-        [
             'name' => 'ErgoVision',
             'tagline' => 'AI posture correction',
             'subtitle' => 'Angle-based scoring and adaptive feedback',
@@ -28,6 +17,17 @@ return [
             'featured' => true,
             'live' => 'https://www.ergovision.online',
             'github' => 'https://github.com/v-cyril/ergovision',
+        ],
+        [
+            'name' => 'VertexShop',
+            'tagline' => 'E-commerce platform',
+            'description' => 'A full-stack e-commerce platform with user authentication, product catalog, cart, wishlist, mock checkout, and order tracking. Includes an admin dashboard for inventory and orders, REST APIs with Laravel Sanctum, and a responsive Vue.js storefront.',
+            'tags' => ['Laravel', 'Vue.js', 'MySQL', 'Sanctum', 'REST API', 'Tailwind CSS'],
+            'accent' => 'violet',
+            'image' => 'images/projects/vertexshop.png',
+            'featured' => true,
+            'live' => 'https://vertexshop.cyrilegipto.space',
+            'github' => 'https://github.com/DarivsXP/VertexShop',
         ],
         [
             'name' => "Nathalie's Bakeshop",
