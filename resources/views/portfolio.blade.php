@@ -237,9 +237,11 @@
                                                 Live demo ↗
                                             </a>
                                         @endif
-                                        <a href="{{ $project['github'] }}" target="_blank" rel="noopener" class="project-link">
-                                            GitHub ↗
-                                        </a>
+                                        @if (! empty($project['github']))
+                                            <a href="{{ $project['github'] }}" target="_blank" rel="noopener" class="project-link">
+                                                GitHub ↗
+                                            </a>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
