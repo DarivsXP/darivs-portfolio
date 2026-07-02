@@ -136,7 +136,7 @@
                         Junior full-stack developer focused on building reliable, user-facing software.
                         I've worked on Laravel + Vue.js platforms at <strong>RevDojo</strong>, delivered freelance
                         projects across PHP, Python, C, and C++, and shipped full-stack apps like
-                        <strong>VertexShop</strong> and <strong>ErgoVision</strong>.
+                        <strong>VertexShop</strong>, <strong>ErgoVision</strong>, and <strong>JobHunterAI</strong>.
                         More detail on my experience and stack is in my CV.
                     </p>
                     <a href="{{ asset(config('portfolio.cv_path')) }}" class="btn btn-ghost magnetic" download>
