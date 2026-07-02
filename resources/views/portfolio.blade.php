@@ -77,7 +77,7 @@
                         <span class="hero-name-line" data-split>Darivs <em class="hero-name-accent">Egipto</em></span>
                     </h1>
                     <p class="hero-lead animate-in" style="--i:2">
-                        I design and ship full-stack web applications — from REST APIs and dashboards to AI-powered products.
+                        I build things — web apps, AI pipelines, and whatever problem needs solving next.
                     </p>
                     <p class="hero-typed-wrap animate-in" style="--i:2">
                         <span class="hero-typed-label">Currently building as a</span>
@@ -101,16 +101,19 @@
                     </div>
                 </div>
 
-                <div class="hero-visual animate-in" style="--i:2" aria-hidden="true">
+                <div class="hero-visual animate-in" style="--i:2">
                     <div class="hero-orbit-system">
                         <div class="orbit-ring orbit-ring--1"></div>
                         <div class="orbit-ring orbit-ring--2"></div>
                         <div class="orbit-ring orbit-ring--3"></div>
-                        <div class="orbit-core">
-                            <span class="orbit-bracket orbit-bracket--l">{</span>
-                            <span class="orbit-bracket orbit-bracket--r">}</span>
+                        <div class="orbit-core orbit-core--photo">
+                            <img
+                                src="{{ asset('portfolio-image-darivs.jpg') }}"
+                                alt="V Cyril Darivs Egipto"
+                                class="orbit-photo"
+                            >
                         </div>
-                        <div class="orbit-satellites-spin">
+                        <div class="orbit-satellites-spin" aria-hidden="true">
                             @foreach (array_slice(config('portfolio.skills'), 0, 6) as $i => $skill)
                                 <div class="orbit-arm" style="--angle: {{ $i * 60 }}deg">
                                     <span class="orbit-satellite" style="--sat-color: {{ $skill['color'] }}">{{ $skill['name'] }}</span>
@@ -127,21 +130,39 @@
             </a>
         </section>
 
-        {{-- About (brief) --}}
+        {{-- About --}}
         <section id="about" class="section section--compact">
-            <div class="container narrow">
-                <div class="about-brief reveal">
-                    <span class="section-label">About</span>
-                    <p class="about-brief-text">
-                        Junior full-stack developer focused on building reliable, user-facing software.
-                        I've worked on Laravel + Vue.js platforms at <strong>RevDojo</strong>, delivered freelance
-                        projects across PHP, Python, C, and C++, and shipped full-stack apps like
-                        <strong>VertexShop</strong>, <strong>ErgoVision</strong>, and <strong>JobHunterAI</strong>.
-                        More detail on my experience and stack is in my CV.
-                    </p>
-                    <a href="{{ asset(config('portfolio.cv_path')) }}" class="btn btn-ghost magnetic" download>
-                        Get the full resume →
-                    </a>
+            <div class="container">
+                <div class="about-full reveal">
+                    <div class="about-photo-col">
+                        <div class="about-photo-frame">
+                            <img
+                                src="{{ asset('portfolio-image-darivs.jpg') }}"
+                                alt="V Cyril Darivs Egipto"
+                                class="about-photo"
+                            >
+                            <div class="about-photo-glow" aria-hidden="true"></div>
+                        </div>
+                    </div>
+                    <div class="about-text-col">
+                        <span class="section-label">About</span>
+                        <p class="about-tagline">I love building things.</p>
+                        <p class="about-brief-text">
+                            I'm a Computer Science graduate from the Philippines who finds satisfaction in turning ideas
+                            into working software. Whether it's a polished storefront, a real-time AI pipeline, or a tool
+                            that solves a problem I've been staring at — I'm most at home when I'm building.
+                        </p>
+                        <p class="about-brief-text">
+                            I've contributed to production Laravel + Vue.js platforms during my internship at <strong>RevDojo</strong>,
+                            and have independently shipped projects like <strong>ErgoVision</strong> (AI posture correction),
+                            <strong>VertexShop</strong> (full e-commerce), and <strong>JobHunterAI</strong> (AI-powered job tracking).
+                            My stack spans PHP, Python, JavaScript, and beyond — but the language doesn't matter as much
+                            as shipping something that works.
+                        </p>
+                        <a href="{{ asset(config('portfolio.cv_path')) }}" class="btn btn-ghost magnetic" download>
+                            Get the full resume →
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -215,6 +236,10 @@
                                     <div class="project-media-shine" aria-hidden="true"></div>
                                     <div class="project-media-meta">
                                         <span class="project-tagline">{{ $project['tagline'] }}</span>
+                                        <span class="project-status-badge">
+                                            <span class="project-status-dot"></span>
+                                            Live
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="project-body">
