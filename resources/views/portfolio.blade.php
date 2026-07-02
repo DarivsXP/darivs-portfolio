@@ -44,7 +44,7 @@
             <ul class="nav-links" id="nav-links">
                 <li><a href="#about">About</a></li>
                 <li><a href="#stack">Stack</a></li>
-                <li><a href="#projects">Work</a></li>
+                <li><a href="#projects">Projects</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li>
                     <a href="{{ asset(config('portfolio.cv_path')) }}" class="nav-cta" download>
@@ -101,19 +101,16 @@
                     </div>
                 </div>
 
-                <div class="hero-visual animate-in" style="--i:2">
+                <div class="hero-visual animate-in" style="--i:2" aria-hidden="true">
                     <div class="hero-orbit-system">
                         <div class="orbit-ring orbit-ring--1"></div>
                         <div class="orbit-ring orbit-ring--2"></div>
                         <div class="orbit-ring orbit-ring--3"></div>
-                        <div class="orbit-core orbit-core--photo">
-                            <img
-                                src="{{ asset('portfolio-image-darivs.jpg') }}"
-                                alt="V Cyril Darivs Egipto"
-                                class="orbit-photo"
-                            >
+                        <div class="orbit-core">
+                            <span class="orbit-bracket orbit-bracket--l">{</span>
+                            <span class="orbit-bracket orbit-bracket--r">}</span>
                         </div>
-                        <div class="orbit-satellites-spin" aria-hidden="true">
+                        <div class="orbit-satellites-spin">
                             @foreach (array_slice(config('portfolio.skills'), 0, 6) as $i => $skill)
                                 <div class="orbit-arm" style="--angle: {{ $i * 60 }}deg">
                                     <span class="orbit-satellite" style="--sat-color: {{ $skill['color'] }}">{{ $skill['name'] }}</span>
