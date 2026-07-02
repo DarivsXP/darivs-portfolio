@@ -77,7 +77,7 @@
                         <span class="hero-name-line" data-split>Darivs <em class="hero-name-accent">Egipto</em></span>
                     </h1>
                     <p class="hero-lead animate-in" style="--i:2">
-                        I build things — web apps, AI pipelines, and whatever problem needs solving next.
+                        I build things, web apps, AI pipelines, and whatever problem needs solving next.
                     </p>
                     <p class="hero-typed-wrap animate-in" style="--i:2">
                         <span class="hero-typed-label">Currently building as a</span>
@@ -150,7 +150,7 @@
                         <p class="about-brief-text">
                             I'm a Computer Science graduate from the Philippines who finds satisfaction in turning ideas
                             into working software. Whether it's a polished storefront, a real-time AI pipeline, or a tool
-                            that solves a problem I've been staring at — I'm most at home when I'm building.
+                            that solves a problem I've been staring at, I'm most at home when I'm building.
                         </p>
                         <p class="about-brief-text">
                             I've contributed to production Laravel + Vue.js platforms during my internship at <strong>RevDojo</strong>,
