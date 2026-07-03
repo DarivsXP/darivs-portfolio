@@ -197,7 +197,7 @@
                         </div>
                     </div>
                     <div class="skill-group">
-                        <span class="skill-group-label">Backend & APIs</span>
+                        <span class="skill-group-label">Backend &amp; Concepts</span>
                         <div class="skill-chips">
                             @foreach (config('portfolio.skill_groups.backend') as $skill)
                                 <span class="stack-chip" style="--chip-color: {{ $skill['color'] }}">
@@ -208,7 +208,7 @@
                         </div>
                     </div>
                     <div class="skill-group">
-                        <span class="skill-group-label">DB & DevOps</span>
+                        <span class="skill-group-label">DB &amp; DevOps</span>
                         <div class="skill-chips">
                             @foreach (config('portfolio.skill_groups.devops') as $skill)
                                 <span class="stack-chip" style="--chip-color: {{ $skill['color'] }}">
@@ -238,9 +238,16 @@
                         >
                             <span class="project-row-num">{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</span>
 
+                            <div class="project-row-img-wrap">
+                                <img src="{{ asset($project['image']) }}" alt="{{ $project['name'] }} preview" class="project-row-img" loading="lazy">
+                            </div>
+
                             <div class="project-row-body">
                                 <div class="project-row-top">
-                                    <h3 class="project-row-title">{{ $project['name'] }}</h3>
+                                    <h3 class="project-row-title">
+                                        {{ $project['name'] }}
+                                        <span class="project-row-year">{{ $project['year'] }}</span>
+                                    </h3>
                                     <span class="project-row-cat">{{ $project['tagline'] }}</span>
                                     @if($project['featured'] ?? false)
                                         <span class="project-row-featured">Featured</span>

@@ -6,6 +6,7 @@ return [
     'projects' => [
         [
             'name' => 'ErgoVision',
+            'year' => '2025',
             'tagline' => 'AI posture correction',
             'subtitle' => 'Angle-based scoring and adaptive feedback',
             'description' => 'An AI-powered posture correction system that uses MediaPipe pose estimation to track body angles in real time. Scores ergonomic alignment with an angle-based engine and delivers adaptive feedback to help users fix desk posture — backed by a Laravel + Vue.js dashboard, Python ML pipeline, and MySQL database.',
@@ -20,6 +21,7 @@ return [
         ],
         [
             'name' => 'JobHunterAI',
+            'year' => '2026',
             'tagline' => 'AI career assistant',
             'subtitle' => 'Resume-aware scoring, ranking & job tracking',
             'description' => 'An AI-powered job hunting pipeline that scrapes remote listings from multiple sources, scores and ranks them against a developer profile using OpenAI, and tracks every application in a drag-and-drop Kanban dashboard. Features Telegram notifications, SQLite persistence, and a background scheduler for fully automated daily scans.',
@@ -34,6 +36,7 @@ return [
         ],
         [
             'name' => 'VertexShop',
+            'year' => '2026',
             'tagline' => 'E-commerce platform',
             'description' => 'A full-stack e-commerce platform with user authentication, product catalog, cart, wishlist, mock checkout, and order tracking. Includes an admin dashboard for inventory and orders, REST APIs with Laravel Sanctum, and a responsive Vue.js storefront.',
             'tags' => ['Laravel', 'Vue.js', 'MySQL', 'Sanctum', 'REST API', 'Tailwind CSS'],
@@ -45,9 +48,10 @@ return [
         ],
         [
             'name' => "Nathalie's Bakeshop",
-            'tagline' => 'In progress',
+            'year' => '2026',
+            'tagline' => 'Client bakeshop platform',
             'subtitle' => 'Client bakeshop platform',
-            'description' => 'A Laravel + React web application in active development for a local bakeshop client. Built around product showcases, ordering flows, and an admin-friendly structure so the owner can update menus and specials with ease — warm, mobile-first, and designed to convert casual browsers into repeat customers.',
+            'description' => 'A published Laravel + React web application built for a local bakeshop client. Features custom product showcases, interactive ordering flows, and an admin-friendly structure so the owner can update menus and specials with ease — warm, mobile-first, and highly optimized.',
             'tags' => ['Laravel', 'React', 'MySQL', 'REST API', 'Tailwind CSS'],
             'accent' => 'amber',
             'image' => 'images/projects/nathaliesbakeshop.png',
@@ -57,6 +61,7 @@ return [
         ],
         [
             'name' => 'Your Offshore Accountant',
+            'year' => '2024',
             'tagline' => 'Client project',
             'subtitle' => 'Bookkeeping services for US & Canadian firms',
             'description' => 'A professional marketing site built for an offshore accounting firm offering personalized, cost-effective bookkeeping to US and Canadian teams. Crafted with semantic HTML5 and Bootstrap 5 — service pages, clear CTAs, and a polished brand presence the client loved from day one.',
