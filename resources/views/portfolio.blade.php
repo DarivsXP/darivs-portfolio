@@ -143,20 +143,22 @@
                     </div>
                     <div class="about-text-col">
                         <span class="section-label">About</span>
-                        <p class="about-tagline">I love building things.</p>
+                        <p class="about-tagline">I ship things that work.</p>
                         <p class="about-brief-text">
-                            CS graduate from the Philippines. Interned at <strong>RevDojo</strong> on production Laravel + Vue.js platforms.
-                            Independently shipped <strong>ErgoVision</strong> (AI posture), <strong>VertexShop</strong> (e-commerce),
-                            and <strong>JobHunterAI</strong> — full AI pipeline to job tracking dashboard.
+                            B.S. CS graduate from the Philippines (2026).
+                            While studying, I spent 3+ years at <strong>Strikingly</strong> as a Technical Support Representative &mdash;
+                            resolving 80+ issues daily, maintaining a 96%+ satisfaction rating, and collaborating directly with
+                            engineering teams. I've also delivered <strong>12+ freelance projects</strong> across PHP, Python, C, and C++,
+                            and independently shipped AI pipelines and full-stack platforms, all live in production.
                         </p>
                         <div class="about-highlights">
-                            <span class="about-highlight-chip">🎓 B.S. Computer Science</span>
-                            <span class="about-highlight-chip">🏢 RevDojo Intern</span>
-                            <span class="about-highlight-chip">🚀 3 shipped products</span>
-                            <span class="about-highlight-chip">🌏 Philippines</span>
+                            <span class="about-highlight-chip">🎓 B.S. CS &middot; FAITH 2026</span>
+                            <span class="about-highlight-chip">💼 3+ yrs professional exp.</span>
+                            <span class="about-highlight-chip">🤖 AI &amp; Full-Stack</span>
+                            <span class="about-highlight-chip">🚀 5 live products</span>
                         </div>
                         <a href="{{ asset(config('portfolio.cv_path')) }}" class="btn btn-ghost magnetic" download>
-                            Get the full resume →
+                            Get the full resume &rarr;
                         </a>
                     </div>
                 </div>
@@ -281,7 +283,7 @@
                         <a href="mailto:darivsxp@gmail.com" class="contact-pill magnetic magnetic-strong">darivsxp@gmail.com</a>
                         <a href="tel:+639763575830" class="contact-pill magnetic magnetic-strong">+63 976 357 5830</a>
                         <a href="https://linkedin.com/in/v-cyril" target="_blank" rel="noopener" class="contact-pill magnetic magnetic-strong">LinkedIn</a>
-                        <!-- <a href="https://github.com/v-cyril" target="_blank" rel="noopener" class="contact-pill magnetic magnetic-strong">GitHub</a> -->
+                        <a href="https://github.com/DarivsXP" target="_blank" rel="noopener" class="contact-pill magnetic magnetic-strong">GitHub</a>
                     </div>
                 </div>
             </div>
