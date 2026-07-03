@@ -73,8 +73,8 @@
                         Junior Full-Stack Developer
                     </p>
                     <h1 class="hero-name" id="hero-name">
-                        <span class="hero-name-line" data-split>V Cyril</span>
-                        <span class="hero-name-line" data-split>Darivs <em class="hero-name-accent">Egipto</em></span>
+                        <span class="hero-name-line" data-split>V Cyril Darivs</span>
+                        <span class="hero-name-line" data-split><em class="hero-name-accent">Egipto</em></span>
                     </h1>
                     <p class="hero-lead animate-in" style="--i:2">
                         I build things, web apps, AI pipelines, and whatever problem needs solving next.
@@ -145,17 +145,16 @@
                         <span class="section-label">About</span>
                         <p class="about-tagline">I love building things.</p>
                         <p class="about-brief-text">
-                            I'm a Computer Science graduate from the Philippines who finds satisfaction in turning ideas
-                            into working software. Whether it's a polished storefront, a real-time AI pipeline, or a tool
-                            that solves a problem I've been staring at, I'm most at home when I'm building.
+                            CS graduate from the Philippines. Interned at <strong>RevDojo</strong> on production Laravel + Vue.js platforms.
+                            Independently shipped <strong>ErgoVision</strong> (AI posture), <strong>VertexShop</strong> (e-commerce),
+                            and <strong>JobHunterAI</strong> — full AI pipeline to job tracking dashboard.
                         </p>
-                        <p class="about-brief-text">
-                            I've contributed to production Laravel + Vue.js platforms during my internship at <strong>RevDojo</strong>,
-                            and have independently shipped projects like <strong>ErgoVision</strong> (AI posture correction),
-                            <strong>VertexShop</strong> (full e-commerce), and <strong>JobHunterAI</strong> (AI-powered job tracking).
-                            My stack spans PHP, Python, JavaScript, and beyond — but the language doesn't matter as much
-                            as shipping something that works.
-                        </p>
+                        <div class="about-highlights">
+                            <span class="about-highlight-chip">🎓 B.S. Computer Science</span>
+                            <span class="about-highlight-chip">🏢 RevDojo Intern</span>
+                            <span class="about-highlight-chip">🚀 3 shipped products</span>
+                            <span class="about-highlight-chip">🌏 Philippines</span>
+                        </div>
                         <a href="{{ asset(config('portfolio.cv_path')) }}" class="btn btn-ghost magnetic" download>
                             Get the full resume →
                         </a>
@@ -164,27 +163,53 @@
             </div>
         </section>
 
-        {{-- Stack banner (single instance, auto-scroll) --}}
-        <section id="stack" class="stack-banner-section" aria-label="Tech stack">
-            <div class="container section-header stack-banner-header">
-                <span class="section-label">Stack</span>
-                <h2 class="section-title section-title--sm">Technologies I work with</h2>
-            </div>
+        {{-- Stack grid (grouped by category) --}}
+        <section id="stack" class="stack-grid-section" aria-label="Tech stack">
+            <div class="container">
+                <div class="section-header stack-grid-header">
+                    <span class="section-label">Stack</span>
+                    <h2 class="section-title section-title--sm">Technologies I work with</h2>
+                </div>
 
-            <div class="stack-banner" id="stack-banner">
-                <div class="stack-banner-viewport">
-                    <div class="stack-banner-track" id="stack-banner-track">
-                        <div class="stack-banner-group">
-                            @foreach (config('portfolio.skills') as $i => $skill)
-                                <span class="stack-chip" style="--chip-color: {{ $skill['color'] }}; --chip-i: {{ $i }}">
+                <div class="skill-groups">
+                    <div class="skill-group">
+                        <span class="skill-group-label">Languages</span>
+                        <div class="skill-chips">
+                            @foreach (config('portfolio.skill_groups.languages') as $skill)
+                                <span class="stack-chip" style="--chip-color: {{ $skill['color'] }}">
                                     <span class="stack-chip-dot" style="background: {{ $skill['color'] }}"></span>
                                     {{ $skill['name'] }}
                                 </span>
                             @endforeach
                         </div>
-                        <div class="stack-banner-group" aria-hidden="true">
-                            @foreach (config('portfolio.skills') as $i => $skill)
-                                <span class="stack-chip" style="--chip-color: {{ $skill['color'] }}; --chip-i: {{ $i }}">
+                    </div>
+                    <div class="skill-group">
+                        <span class="skill-group-label">Frontend</span>
+                        <div class="skill-chips">
+                            @foreach (config('portfolio.skill_groups.frontend') as $skill)
+                                <span class="stack-chip" style="--chip-color: {{ $skill['color'] }}">
+                                    <span class="stack-chip-dot" style="background: {{ $skill['color'] }}"></span>
+                                    {{ $skill['name'] }}
+                                </span>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <span class="skill-group-label">Backend & APIs</span>
+                        <div class="skill-chips">
+                            @foreach (config('portfolio.skill_groups.backend') as $skill)
+                                <span class="stack-chip" style="--chip-color: {{ $skill['color'] }}">
+                                    <span class="stack-chip-dot" style="background: {{ $skill['color'] }}"></span>
+                                    {{ $skill['name'] }}
+                                </span>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <span class="skill-group-label">DB & DevOps</span>
+                        <div class="skill-chips">
+                            @foreach (config('portfolio.skill_groups.devops') as $skill)
+                                <span class="stack-chip" style="--chip-color: {{ $skill['color'] }}">
                                     <span class="stack-chip-dot" style="background: {{ $skill['color'] }}"></span>
                                     {{ $skill['name'] }}
                                 </span>
@@ -203,69 +228,40 @@
                     <h2 class="section-title section-title--sm">Selected work</h2>
                 </div>
 
-                <div class="project-showcase-grid" id="projects-grid">
+                <div class="project-list" id="projects-grid">
                     @foreach (config('portfolio.projects') as $index => $project)
-                        @php
-                            $imageSlug = pathinfo($project['image'], PATHINFO_FILENAME);
-                            $imageFallback = asset('images/projects/'.$imageSlug.'.svg');
-                            $imageFit = $project['image_fit'] ?? 'cover';
-                            $imagePosition = $project['image_position'] ?? 'center';
-                        @endphp
                         <article
-                            class="project-showcase project-showcase--{{ $project['accent'] }}{{ ($project['featured'] ?? false) ? ' project-showcase--featured' : '' }}"
-                            style="--delay: {{ $index * 0.1 }}s"
+                            class="project-row project-row--{{ $project['accent'] }}"
+                            style="--delay: {{ $index * 0.08 }}s"
                         >
-                            <div class="project-showcase-inner">
-                                <div class="project-media">
-                                    <picture>
-                                        <source srcset="{{ asset($project['image']) }}" type="image/png">
-                                        <img
-                                            src="{{ asset($project['image']) }}"
-                                            alt="{{ $project['name'] }} preview"
-                                            class="project-demo-img"
-                                            data-fallback="{{ $imageFallback }}"
-                                            style="object-fit: {{ $imageFit }}; object-position: {{ $imagePosition }};"
-                                            loading="lazy"
-                                            width="1200"
-                                            height="675"
-                                        >
-                                    </picture>
-                                    <div class="project-media-shine" aria-hidden="true"></div>
-                                    <div class="project-media-meta">
-                                        <span class="project-tagline">{{ $project['tagline'] }}</span>
-                                        <span class="project-status-badge">
-                                            <span class="project-status-dot"></span>
-                                            Live
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="project-body">
-                                    <h3 class="project-title">{{ $project['name'] }}</h3>
-                                    @if (! empty($project['subtitle']))
-                                        <p class="project-subtitle">{{ $project['subtitle'] }}</p>
+                            <span class="project-row-num">{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</span>
+
+                            <div class="project-row-body">
+                                <div class="project-row-top">
+                                    <h3 class="project-row-title">{{ $project['name'] }}</h3>
+                                    <span class="project-row-cat">{{ $project['tagline'] }}</span>
+                                    @if($project['featured'] ?? false)
+                                        <span class="project-row-featured">Featured</span>
                                     @endif
-                                    <p class="project-desc">{{ $project['description'] }}</p>
-                                    <div class="project-tech">
-                                        <span class="project-tech-label">Technologies used</span>
-                                        <div class="tag-row">
-                                        @foreach ($project['tags'] as $tag)
-                                            <span class="tag">{{ $tag }}</span>
-                                        @endforeach
-                                        </div>
-                                    </div>
-                                    <div class="project-links">
-                                        @if ($project['live'])
-                                            <a href="{{ $project['live'] }}" target="_blank" rel="noopener" class="project-link project-link--live">
-                                                Live demo ↗
-                                            </a>
-                                        @endif
-                                        @if (! empty($project['github']))
-                                            <a href="{{ $project['github'] }}" target="_blank" rel="noopener" class="project-link">
-                                                GitHub ↗
-                                            </a>
-                                        @endif
-                                    </div>
                                 </div>
+                                <p class="project-row-desc">{{ $project['description'] }}</p>
+                                <div class="tag-row">
+                                    @foreach(array_slice($project['tags'], 0, 5) as $tag)
+                                        <span class="tag">{{ $tag }}</span>
+                                    @endforeach
+                                    @if(count($project['tags']) > 5)
+                                        <span class="tag">+{{ count($project['tags']) - 5 }}</span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="project-row-actions">
+                                @if($project['live'])
+                                    <a href="{{ $project['live'] }}" target="_blank" rel="noopener" class="project-link project-link--live">Live ↗</a>
+                                @endif
+                                @if(!empty($project['github']))
+                                    <a href="{{ $project['github'] }}" target="_blank" rel="noopener" class="project-link">GitHub ↗</a>
+                                @endif
                             </div>
                         </article>
                     @endforeach
@@ -285,7 +281,7 @@
                         <a href="mailto:darivsxp@gmail.com" class="contact-pill magnetic magnetic-strong">darivsxp@gmail.com</a>
                         <a href="tel:+639763575830" class="contact-pill magnetic magnetic-strong">+63 976 357 5830</a>
                         <a href="https://linkedin.com/in/v-cyril" target="_blank" rel="noopener" class="contact-pill magnetic magnetic-strong">LinkedIn</a>
-                        <a href="https://github.com/v-cyril" target="_blank" rel="noopener" class="contact-pill magnetic magnetic-strong">GitHub</a>
+                        <!-- <a href="https://github.com/v-cyril" target="_blank" rel="noopener" class="contact-pill magnetic magnetic-strong">GitHub</a> -->
                     </div>
                 </div>
             </div>

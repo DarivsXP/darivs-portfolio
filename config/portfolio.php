@@ -111,4 +111,41 @@ return [
         'API Architect',
         'Python Developer',
     ],
+
+    'skill_groups' => [
+        'languages' => [
+            ['name' => 'PHP',        'color' => '#8b5cf6'],
+            ['name' => 'Python',     'color' => '#fbbf24'],
+            ['name' => 'JavaScript', 'color' => '#facc15'],
+            ['name' => 'TypeScript', 'color' => '#60a5fa'],
+            ['name' => 'C',          'color' => '#94a3b8'],
+            ['name' => 'C++',        'color' => '#6b9dcf'],
+        ],
+        'frontend' => [
+            ['name' => 'Vue.js',       'color' => '#34d399'],
+            ['name' => 'React',        'color' => '#38bdf8'],
+            ['name' => 'Bootstrap',    'color' => '#a78bfa'],
+            ['name' => 'Tailwind CSS', 'color' => '#5eead4'],
+            ['name' => 'Vite',         'color' => '#c084fc'],
+        ],
+        'backend' => [
+            ['name' => 'Laravel',      'color' => '#f87171'],
+            ['name' => 'Node.js',      'color' => '#4ade80'],
+            ['name' => 'RESTful APIs', 'color' => '#fb923c'],
+            ['name' => 'WebSockets',   'color' => '#10b981'],
+            ['name' => 'Sanctum',      'color' => '#f0b88a'],
+            ['name' => 'MVC',          'color' => '#e879f9'],
+            ['name' => 'OOP',          'color' => '#94a3b8'],
+        ],
+        'devops' => [
+            ['name' => 'MySQL',      'color' => '#2dd4bf'],
+            ['name' => 'PostgreSQL', 'color' => '#818cf8'],
+            ['name' => 'Firebase',   'color' => '#fbbf24'],
+            ['name' => 'Docker',     'color' => '#22d3ee'],
+            ['name' => 'Git',        'color' => '#f472b6'],
+            ['name' => 'GitHub',     'color' => '#a78bfa'],
+            ['name' => 'CI/CD',      'color' => '#4ade80'],
+            ['name' => 'Postman',    'color' => '#ff6c37'],
+        ],
+    ],
 ];
