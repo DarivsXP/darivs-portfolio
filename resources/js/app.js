@@ -19,8 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
             loader.classList.add('is-done');
             document.body.classList.add('is-loaded');
         };
-        window.addEventListener('load', () => setTimeout(finish, 400), { once: true });
-        setTimeout(finish, 1500);
+        window.addEventListener('load', () => setTimeout(finish, 150), { once: true });
+        setTimeout(finish, 600);
     }
 
     // Sticky header (native scroll — no Lenis)

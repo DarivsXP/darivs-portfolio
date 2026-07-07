@@ -13,7 +13,11 @@
     <link rel="icon" href="/logo.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    {{-- Non-blocking font load: loads after page renders, swaps in without blocking --}}
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Syne:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Syne:wght@400;500;600;700;800&display=swap"></noscript>
+    {{-- Preload above-the-fold profile photo --}}
+    <link rel="preload" as="image" href="{{ asset('portfolio-image-darivs.webp') }}" type="image/webp">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="portfolio-body portfolio-body--motion antialiased">
@@ -134,9 +138,11 @@
                     <div class="about-photo-col">
                         <div class="about-photo-frame">
                             <img
-                                src="{{ asset('portfolio-image-darivs.jpg') }}"
+                                src="{{ asset('portfolio-image-darivs.webp') }}"
                                 alt="V Cyril Darivs Egipto"
                                 class="about-photo"
+                                fetchpriority="high"
+                                decoding="async"
                             >
                             <div class="about-photo-glow" aria-hidden="true"></div>
                         </div>
